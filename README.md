@@ -1,4 +1,4 @@
-![stackOps@3x](.\logo\3x\stackOps@3x.png)
+![stackOps@3x](.\logo\3x\stackOps.png)
 
 
 
