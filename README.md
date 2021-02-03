@@ -1,7 +1,8 @@
-# <img src=".\SVG\Fichier 1.svg" alt="Fichier 1" style="zoom:5%;" />
+![stackOps@3x](.\logo\3x\stackOps@3x.png)
 
 
 
 # Stack-Ops
 
 Final Porject S10
+
