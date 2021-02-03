@@ -1,0 +1,86 @@
+heat_template_version: 2013-05-23
+
+description: >
+  Création des gabarits
+
+resources:
+  CUSTOM_FLAVOR1:
+    type: OS::Nova::Flavor
+    properties:
+      name: "t2.small"
+      disk: 4
+      is_public: true
+      ram: 1024
+      vcpus: 1
+
+  CUSTOM_FLAVOR2:
+    type: OS::Nova::Flavor
+    properties:
+      name: "t2.medium"
+      disk: 6
+      is_public: true
+      ram: 2048
+      vcpus: 1
+
+  CUSTOM_FLAVOR3:
+    type: OS::Nova::Flavor
+    properties:
+      name: "t2.large"
+      disk: 10
+      is_public: true
+      ram: 2048
+      vcpus: 2
+
+  CUSTOM_FLAVOR4:
+    type: OS::Nova::Flavor
+    properties:
+      name: "m2.small"
+      disk: 20
+      is_public: true
+      ram: 2048
+      vcpus: 2
+
+  CUSTOM_FLAVO5:
+    type: OS::Nova::Flavor
+    properties:
+      name: "m2.medium"
+      disk: 40
+      is_public: true
+      ram: 4096
+      vcpus: 4
+
+  CUSTOM_FLAVOR6:
+    type: OS::Nova::Flavor
+    properties:
+      name: "m2.large"
+      disk: 60
+      is_public: true
+      ram: 8192
+      vcpus: 4
+
+  CUSTOM_FLAVOR7:
+    type: OS::Nova::Flavor
+    properties:
+      name: "l2.small"
+      disk: 100
+      is_public: true
+      ram: 8192
+      vcpus: 4
+
+  CUSTOM_FLAVOR8:
+    type: OS::Nova::Flavor
+    properties:
+      name: "l2.medium"
+      disk: 150
+      is_public: true
+      ram: 8192
+      vcpus: 6
+
+  CUSTOM_FLAVOR9:
+    type: OS::Nova::Flavor
+    properties:
+      name: "l2.large"
+      disk: 250
+      is_public: true
+      ram: 16384
+      vcpus: 8

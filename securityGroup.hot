@@ -1,0 +1,89 @@
+heat_template_version: 2013-05-23
+
+description: >
+  Création de groupes de sécurités par défaut
+
+parameters:
+
+  REMOTE_IP_DNS:
+    type: string
+    description: Adresse spécifique
+    default: 192.168.10.0/24
+
+  REMOTE_IP_ALL:
+    type: string
+    description: Adresse par défaut
+    default: 0.0.0.0/0
+
+resources:
+  SECURITY_GROUP1:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: ConnexionRDP
+      description: >
+        Groupe de sécurité créé :
+        Autorisation des connexions distantes via le protocol RDP (3389)
+      rules:
+         #1 ingress: TCP/RDP/3389/RemoteIPAll
+         - { remote_ip_prefix: { get_param: REMOTE_IP_ALL }, direction: ingress, protocol: tcp, port_range_min: 3389, port_range_max: 3389}
+
+  SECURITY_GROUP2:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: ConnexionSSH
+      description: >
+        Groupe de sécurité créé :
+        Autorisation des connexions distantes via le protocol SSH (22)
+      rules:
+         #1 ingress: TCP/SSH/22/RemoteIPAll
+         - { remote_ip_prefix: { get_param: REMOTE_IP_ALL }, direction: ingress, protocol: tcp, port_range_min: 22, port_range_max: 22}
+
+  SECURITY_GROUP3:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: ServerWeb
+      description: >
+        Groupe de sécurité créé :
+        Autorisation des connexions distantes via le protocol HTTP & HTTPS (80 & 443)
+      rules:
+         #1 ingress: TCP/HTTP/80/RemoteIPAll
+         - { remote_ip_prefix: { get_param: REMOTE_IP_ALL }, direction: ingress, protocol: tcp, port_range_min: 80, port_range_max: 80}
+         #2 ingress: TCP/HTTPS/443/RemoteIPAll
+         - { remote_ip_prefix: { get_param: REMOTE_IP_ALL }, direction: ingress, protocol: tcp, port_range_min: 443, port_range_max: 443}
+
+  SECURITY_GROUP4:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: ClientDNS
+      description: >
+        Groupe de sécurité créé :
+        Autorisation de la machine a résoudre des noms DNS pour elle même (53)
+      rules:
+         #1 ingress: TCP/DNS/53/RemoteIPAll
+         - { remote_ip_prefix: { get_param: REMOTE_IP_DNS }, direction: ingress, protocol: tcp, port_range_min: 53, port_range_max: 53}
+         #2 ingress: UDP/DNS/53/RemoteIPAll
+         - { remote_ip_prefix: { get_param: REMOTE_IP_DNS }, direction: ingress, protocol: udp, port_range_min: 53, port_range_max: 53}
+
+  SECURITY_GROUP5:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: ServerDNS
+      description: >
+        Groupe de sécurité créé :
+        Autorisation de la machine a résoudre des noms DNS pour le client/internet (53)
+      rules:
+         #1 ingress: TCP/DNS/53/RemoteIPAll
+         - { remote_ip_prefix: { get_param: REMOTE_IP_ALL }, direction: ingress, protocol: tcp, port_range_min: 53, port_range_max: 53}
+         #2 ingress: UDP/DNS/53/RemoteIPAll
+         - { remote_ip_prefix: { get_param: REMOTE_IP_ALL }, direction: ingress, protocol: udp, port_range_min: 53, port_range_max: 53}
+
+  SECURITY_GROUP6:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: ICMP
+      description: >
+        Groupe de sécurité créé :
+        Autorisation des messages de contrôle et d’erreur (ALL)
+      rules:
+         #1 ingress: ICMP/All/RemoteIPAll
+         - { remote_ip_prefix: { get_param: REMOTE_IP_ALL }, direction: ingress, protocol: icmp}
