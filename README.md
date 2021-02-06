@@ -1,8 +1,15 @@
-![stackOps](.\logo\3x\stackOps.png)
+![Imgur](https://i.imgur.com/30HoYoj.png)
 
 
 
-# Stack-Ops
+# OpenStack
 
-Final Porject S10
+#### Module used in this project:
+
+
+
+* [`Nova`](https://opendev.org/openstack/puppet-nova/) -  (Compute)
+* [`Neutron`](https://opendev.org/openstack/puppet-neutron/) - (Networking)
+* [`Keystone`](https://opendev.org/openstack/puppet-keystone/) - (Identity)
+* [`Glance`](https://opendev.org/openstack/puppet-glance/) - (Image Service)
 
