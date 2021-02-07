@@ -12,4 +12,5 @@
 * [`Neutron`](https://opendev.org/openstack/puppet-neutron/) - (Networking)
 * [`Keystone`](https://opendev.org/openstack/puppet-keystone/) - (Identity)
 * [`Glance`](https://opendev.org/openstack/puppet-glance/) - (Image Service)
+* [`Heat`](https://opendev.org/openstack/puppet-heat/) - (Orchestration)
 
