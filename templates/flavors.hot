@@ -17,19 +17,19 @@ parameters:
       description: Stockage (GO)
       default: ""
       constraints:
-        - allowed_pattern: "[a-zA-Z0-9]+"
+        - allowed_pattern: "^[0-9]*$"
     vcpu:
       type: string
       description: Coeur virtuel
       default: ""
       constraints:
-        - allowed_pattern: "[a-zA-Z0-9]+"
+        - allowed_pattern: "^[0-9]*$"
     ram:
       type: string
       description: Mémoire vive (MO)
       default: ""
       constraints:
-        - allowed_pattern: "[a-zA-Z0-9]+"
+        - allowed_pattern: "^[0-9]*$"
 
 conditions:
   is_custom: {equals: [{get_param: custom}, "true"]}
