@@ -1,4 +1,4 @@
-heat_template_version: 2013-05-23
+heat_template_version: 2018-08-31
 
 description: >
   Création de groupes de sécurités par défaut
@@ -29,7 +29,7 @@ resources:
   SECURITY_GROUP3:
     type: OS::Neutron::SecurityGroup
     properties:
-      name: ServerWeb
+      name: ServiceWeb
       description: >
         Groupe de sécurité créé :
         Autorisation des connexions distantes via le protocol HTTP & HTTPS (80 & 443)
@@ -42,7 +42,7 @@ resources:
   SECURITY_GROUP4:
     type: OS::Neutron::SecurityGroup
     properties:
-      name: ClientDNS
+      name: ServiceDNS
       description: >
         Groupe de sécurité créé :
         Autorisation de la machine a résoudre des noms DNS pour elle même (53)
