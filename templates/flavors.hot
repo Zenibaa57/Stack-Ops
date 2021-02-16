@@ -4,9 +4,9 @@ description: >
   Création des gabarits
 
 parameters:
-    custom:
+    Personaliser:
       type: boolean
-      description: Personnalisable
+      description: Création d'un gabarit personaliser
       default: "false"
     name:
       type: string
