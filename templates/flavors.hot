@@ -7,7 +7,6 @@ parameters:
     custom:
       type: boolean
       description: Personnalisable
-      default: "false"
     name:
       type: string
       description: Nom
