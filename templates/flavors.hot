@@ -1,12 +1,12 @@
 heat_template_version: 2018-08-31
 
 description: >
-  Création des gabarits
+  Création d'une collection de gabarits prédéfinis.
 
 parameters:
-    Personnaliser:
+    customize:
       type: boolean
-      description: Création d'un gabarit personnalisé
+      description: Création d'un gabarit personnalisé.
       default: false
     name:
       type: string
@@ -32,7 +32,7 @@ parameters:
         - allowed_pattern: "^[0-9]*$"
 
 conditions:
-  is_custom: {equals: [{get_param: Personnaliser}, true]}
+  is_custom: {equals: [{get_param: customize}, true]}
 
 resources:
   CUSTOM_FLAVOR1:
