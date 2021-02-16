@@ -22,7 +22,7 @@ parameters:
       description: Mémoire vive (MO)
 
 conditions:
-  is_custom: {not: {equals: [{get_param: custom}, ""]}}
+  is_custom: {equals: [{get_param: custom}, true]}
 
 resources:
   CUSTOM_FLAVOR1:
