@@ -13,17 +13,23 @@ parameters:
       description: Nom
       default: ""
     disk:
-      type: number
+      type: string
       description: Stockage (GO)
-      default: 0
+      default: ""
+      constraints:
+        - allowed_pattern: "[a-zA-Z0-9]+"
     vcpu:
-      type: number
+      type: string
       description: Coeur virtuel
-      default:
+      default: ""
+      constraints:
+        - allowed_pattern: "[a-zA-Z0-9]+"
     ram:
-      type: number
+      type: string
       description: Mémoire vive (MO)
-      default: 0
+      default: ""
+      constraints:
+        - allowed_pattern: "[a-zA-Z0-9]+"
 
 conditions:
   is_custom: {equals: [{get_param: custom}, "true"]}
