@@ -7,22 +7,26 @@ parameters:
     custom:
       type: boolean
       description: Personnalisable
-      default: false
+      default: "false"
     name:
       type: string
       description: Nom
+      default: ""
     disk:
       type: number
       description: Stockage (GO)
+      default: ""
     vcpu:
       type: number
       description: Coeur virtuel
+      default: ""
     ram:
       type: number
       description: Mémoire vive (MO)
+      default: ""
 
 conditions:
-  is_custom: {equals: [{get_param: custom}, true]}
+  is_custom: {equals: [{get_param: custom}, "true"]}
 
 resources:
   CUSTOM_FLAVOR1:
