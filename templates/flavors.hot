@@ -4,7 +4,7 @@ description: >
   Création des gabarits
 
 parameters:
-    personnaliser:
+    Personnaliser:
       type: boolean
       description: Création d'un gabarit personnalisé
       default: false
@@ -16,26 +16,23 @@ parameters:
       type: string
       description: Stockage (GO)
       default: ""
-      hidden: true
       constraints:
         - allowed_pattern: "^[0-9]*$"
     vcpu:
       type: string
       description: Coeur virtuel
       default: ""
-      hidden: true
       constraints:
         - allowed_pattern: "^[0-9]*$"
     ram:
       type: string
       description: Mémoire vive (MO)
       default: ""
-      hidden: true
       constraints:
         - allowed_pattern: "^[0-9]*$"
 
 conditions:
-  is_custom: {equals: [{get_param: personnaliser}, true]}
+  is_custom: {equals: [{get_param: Personnaliser}, true]}
 
 resources:
   CUSTOM_FLAVOR1:
