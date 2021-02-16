@@ -1,7 +1,7 @@
 heat_template_version: 2018-08-31
 
 description: >
-  Création de groupes de sécurités par défaut
+  Création de groupes de sécurité prédéfinis.
 
 resources:
   SECURITY_GROUP1:
@@ -45,7 +45,7 @@ resources:
       name: ServiceDNS
       description: >
         Groupe de sécurité créé :
-        Autorisation de la machine a résoudre des noms DNS pour elle même (53)
+        Autorisation de la machine a résoudre des noms DNS pour elle-même (53)
       rules:
          #1 ingress: TCP/DNS/53/RemoteIPAll
          - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: tcp, port_range_min: 53, port_range_max: 53}
