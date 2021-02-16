@@ -40,7 +40,7 @@ resources:
     properties:
       name: "t2.small"
       disk: 4
-      is_public: true
+      is_public: false
       ram: 1024
       vcpus: 1
 
@@ -49,7 +49,7 @@ resources:
     properties:
       name: "t2.medium"
       disk: 6
-      is_public: true
+      is_public: false
       ram: 2048
       vcpus: 1
 
@@ -58,7 +58,7 @@ resources:
     properties:
       name: "t2.large"
       disk: 10
-      is_public: true
+      is_public: false
       ram: 2048
       vcpus: 2
 
@@ -67,16 +67,16 @@ resources:
     properties:
       name: "m2.small"
       disk: 20
-      is_public: true
+      is_public: false
       ram: 2048
       vcpus: 2
 
-  CUSTOM_FLAVO5:
+  CUSTOM_FLAVOR5:
     type: OS::Nova::Flavor
     properties:
       name: "m2.medium"
       disk: 40
-      is_public: true
+      is_public: false
       ram: 4096
       vcpus: 4
 
@@ -85,7 +85,7 @@ resources:
     properties:
       name: "m2.large"
       disk: 60
-      is_public: true
+      is_public: false
       ram: 8192
       vcpus: 4
 
@@ -94,7 +94,7 @@ resources:
     properties:
       name: "l2.small"
       disk: 100
-      is_public: true
+      is_public: false
       ram: 8192
       vcpus: 4
 
@@ -103,7 +103,7 @@ resources:
     properties:
       name: "l2.medium"
       disk: 150
-      is_public: true
+      is_public: false
       ram: 8192
       vcpus: 6
 
@@ -112,7 +112,7 @@ resources:
     properties:
       name: "l2.large"
       disk: 250
-      is_public: true
+      is_public: false
       ram: 16384
       vcpus: 8
 
