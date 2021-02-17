@@ -1,0 +1,88 @@
+heat_template_version: 2018-08-31
+
+description: >
+  Création de toute la stack réseau.
+
+parameters:
+  image:
+    type: string
+    description: L'image à utiliser pour créer l'instance internet_gw et ssh_jumphost.
+    default: bionic-server-cloudimg-amd64
+    constraints:
+      - allowed_values: [ bionic-server-cloudimg-amd64, focal-server-cloudimg-amd64 ]
+
+  flavor:
+    type: string
+    description: Le gabarit à utiliser pour créer l'instance internet_gw et ssh_jumphost.
+    default: "m1.xsmall"
+    constraints:
+      - custom_constraint: nova.flavor
+
+  ext_network:
+    type: string
+    description: Le réseau externe à associer au routeur DMZ.
+    default: "external_network"
+    constraints:
+      - allowed_values: [ external_network ]
+
+resources:
+  network_dmz:
+    type: OS::Neutron::Net
+    properties:
+      name: "network_dmz"
+
+  subnet_dmz:
+    type: OS::Neutron::Subnet
+    properties:
+      name: "subnet_dmz"
+      network_id: { get_resource: network_dmz }
+      cidr: "10.10.60.0/24"
+      gateway_ip: "10.10.60.1"
+      host_routes: [ { "nexthop": "10.10.60.254", "destination": "10.10.50.0/24" } ]
+      dns_nameservers: [ "8.8.8.8", "8.8.4.4" ]
+      ip_version: 4
+
+  router_dmz:
+    type: OS::Neutron::Router
+    properties:
+      name: "router_dmz"
+      external_gateway_info: { "enable_snat": "true", "network": { get_param: ext_network }}
+
+  router_if_dmz:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: router_dmz }
+      subnet: { get_resource: subnet_dmz }
+
+  network_services:
+    type: OS::Neutron::Net
+    properties:
+      name: network_services
+
+  subnet_services:
+    type: OS::Neutron::Subnet
+    properties:
+      name: "subnet_services"
+      network_id: { get_resource: network_services }
+      cidr: "10.10.50.0/24"
+      gateway_ip: "10.10.50.1"
+      dns_nameservers: [ "8.8.8.8", "8.8.4.4" ]
+      ip_version: 4
+
+  router_services:
+    type: OS::Neutron::Router
+    properties:
+      name: "router_services"
+
+  router_if_services_1:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: router_services }
+      subnet: { get_resource: subnet_services }
+
+  router_if_services_2:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: router_services }
+      subnet: { get_resource: subnet_dmz }
+      port: "10.10.60.254"
