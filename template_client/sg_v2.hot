@@ -1,0 +1,23 @@
+heat_template_version: 2018-08-31
+
+description: >
+  Création de groupes de sécurité prédéfinis.
+
+parameters:
+  ports:
+    type: comma_delimited_list
+    default: "22,3389"
+
+resources:
+  security_group:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: web_server_security_group
+      rules:
+        repeat:
+          for_each:
+            <%port%>: { get_param: ports }
+          template:
+            protocol: tcp
+            port_range_min: <%port%>
+            port_range_max: <%port%>
