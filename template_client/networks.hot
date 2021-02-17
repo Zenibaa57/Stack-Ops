@@ -1,64 +1,63 @@
 heat_template_version: 2018-08-31
 
-description: >
-  Création de toute la stack réseau.
+description: Création de toute la stack réseau
 
 parameters:
   image:
     type: string
-    description: L'image à utiliser pour créer les instances internet_gw et ssh_jumphost.
+    description: L'image à utiliser pour créer les instances internet_gw et ssh_jumphost
     default: bionic-server-cloudimg-amd64
     constraints:
-      - allowed_values: [ bionic-server-cloudimg-amd64, focal-server-cloudimg-amd64 ]
-
-  flavor:
-    type: string
-    description: Le gabarit à utiliser pour créer les instances internet_gw et ssh_jumphost.
-    default: "m1.xsmall"
-    constraints:
-      - custom_constraint: nova.flavor
-
-  key_pair:
-    type: string
-    description: La paire de clés à utiliser pour les instances internet_gw et ssh_jumphost.
-    constraints:
-      - custom_constraint: nova.keypair
+    - allowed_values:
+      - bionic-server-cloudimg-amd64
+      - focal-server-cloudimg-amd64 ]
 
   availability_zone:
     type: string
-    description: La zone de disponibilité pour les instances internet_gw et ssh_jumphost.
+    description: La zone de disponibilité pour les instances internet_gw et ssh_jumphost
+    default: az1
     constraints:
-      - allowed_values: [ az1, az2 ]
+    - allowed_values:
+      - az1
+      - az2
 
-  ext_network:
+  flavor:
     type: string
-    description: Le réseau externe à associer au routeur DMZ.
-    default: "external_network"
+    description: Le gabarit à utiliser pour créer les instances internet_gw et ssh_jumphost
     constraints:
-      - allowed_values: [ external_network ]
+    - custom_constraint: nova.flavor
+
+  key_pair:
+    type: string
+    description: La paire de clés à utiliser pour les instances internet_gw et ssh_jumphost
+    constraints:
+    - custom_constraint: nova.keypair
 
 resources:
   network_dmz:
     type: OS::Neutron::Net
     properties:
-      name: "network_dmz"
+      name: network_dmz
 
   subnet_dmz:
     type: OS::Neutron::Subnet
     properties:
-      name: "subnet_dmz"
+      name: subnet_dmz
       network_id: { get_resource: network_dmz }
-      cidr: "10.10.60.0/24"
-      gateway_ip: "10.10.60.1"
-      host_routes: [{ "nexthop": "10.10.60.254", "destination": "10.10.50.0/24" }]
-      dns_nameservers: [ "8.8.8.8", "8.8.4.4" ]
+      cidr: 10.10.60.0/24
+      gateway_ip: 10.10.60.1
+      host_routes:
+      - { nexthop: 10.10.60.254, destination: 10.10.50.0/24 }
+      dns_nameservers:
+      - 8.8.8.8
+      - 8.8.4.4
       ip_version: 4
 
   router_dmz:
     type: OS::Neutron::Router
     properties:
-      name: "router_dmz"
-      external_gateway_info: { "enable_snat": "true", "network": { get_param: ext_network }}
+      name: router_dmz
+      external_gateway_info: { enable_snat: true, network: external_network }
 
   router_if_dmz:
     type: OS::Neutron::RouterInterface
@@ -74,17 +73,19 @@ resources:
   subnet_services:
     type: OS::Neutron::Subnet
     properties:
-      name: "subnet_services"
+      name: subnet_services
       network_id: { get_resource: network_services }
-      cidr: "10.10.50.0/24"
-      gateway_ip: "10.10.50.1"
-      dns_nameservers: [ "8.8.8.8", "8.8.4.4" ]
+      cidr: 10.10.50.0/24
+      gateway_ip: 10.10.50.1
+      dns_nameservers:
+      - 8.8.8.8
+      - 8.8.4.4
       ip_version: 4
 
   router_services:
     type: OS::Neutron::Router
     properties:
-      name: "router_services"
+      name: router_services
 
   router_if_services_1:
     type: OS::Neutron::RouterInterface
@@ -97,7 +98,7 @@ resources:
     properties:
       network: { get_resource: network_dmz }
       fixed_ips:
-      - ip_address: "10.10.60.254"
+      - ip_address: 10.10.60.254
 
   router_if_services_2:
     type: OS::Neutron::RouterInterface
@@ -105,13 +106,38 @@ resources:
       router_id: { get_resource: router_services }
       port: { get_resource: router_port_services }
 
+  ssh_jumphost_floating_ip:
+    type: OS::Neutron::FloatingIP
+    properties:
+      floating_network: external_network
+
   ssh_jumphost:
     type: OS::Nova::Server
     properties:
-      name: "ssh_jumphost"
+      name: ssh_jumphost
       key_name: { get_param: key_pair }
       image: { get_param: image }
       flavor: { get_param: flavor }
       availability_zone: { get_param: availability_zone }
+      security_groups:
+      - sg_ssh
       networks:
-      - subnet: { get_resource: subnet_dmz }
+      - { subnet: { get_resource: subnet_dmz }, floating_ip: { get_resource: ssh_jumphost_floating_ip }}
+
+  internet_gw_floating_ip:
+    type: OS::Neutron::FloatingIP
+    properties:
+      floating_network: external_network
+
+  internet_gw:
+    type: OS::Nova::Server
+    properties:
+      name: internet_gw
+      key_name: { get_param: key_pair }
+      image: { get_param: image }
+      flavor: { get_param: flavor }
+      availability_zone: { get_param: availability_zone }
+      security_groups:
+      - sg_all_from_svc_network
+      networks:
+      - { subnet: { get_resource: subnet_dmz }, floating_ip: { get_resource: internet_gw_floating_ip }}

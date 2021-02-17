@@ -1,7 +1,6 @@
 heat_template_version: 2018-08-31
 
-description: >
-  Création de groupes de sécurité prédéfinis.
+description: Création de groupes de sécurité prédéfinis
 
 resources:
   sg_rdp:
