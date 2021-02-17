@@ -136,3 +136,7 @@ resources:
       vcpus: {get_param: vcpu}
 
 outputs:
+  if_custom:
+    description: Paramètres du gabarit personnalisé.
+    value: {get_attr: [CUSTOM_FLAVORX, name]}
+    condition: is_custom
