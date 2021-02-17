@@ -115,7 +115,7 @@ resources:
       is_public: false
       ram: 16384
       vcpus: 8
-      
+
   CUSTOM_FLAVOR10:
     type: OS::Nova::Flavor
     properties:
@@ -134,3 +134,5 @@ resources:
       is_public: false
       ram: {get_param: ram}
       vcpus: {get_param: vcpu}
+
+outputs:
