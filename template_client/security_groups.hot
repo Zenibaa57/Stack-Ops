@@ -8,7 +8,7 @@ resources:
     type: OS::Neutron::SecurityGroup
     properties:
       name: sg_rdp
-      description: Autoriser les connexions distantes via le protocol RDP (3389).
+      description: Autoriser les connexions distantes via le protocol RDP (3389)
       rules:
          #1 ingress: TCP|RDP|3389|RemoteIPAll
          - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: tcp, port_range_min: 3389, port_range_max: 3389}
@@ -17,7 +17,7 @@ resources:
     type: OS::Neutron::SecurityGroup
     properties:
       name: sg_ssh
-      description: Autoriser les connexions distantes via le protocol SSH (22).
+      description: Autoriser les connexions distantes via le protocol SSH (22)
       rules:
          #1 ingress: TCP|SSH|22|RemoteIPAll
          - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: tcp, port_range_min: 22, port_range_max: 22}
@@ -26,7 +26,7 @@ resources:
     type: OS::Neutron::SecurityGroup
     properties:
       name: sg_service_web
-      description: Autoriser les connexions distantes via le protocol HTTP et HTTPS (80 et 443).
+      description: Autoriser les connexions distantes via le protocol HTTP et HTTPS (80 et 443)
       rules:
          #1 ingress: TCP|HTTP|80|RemoteIPAll
          - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: tcp, port_range_min: 80, port_range_max: 80}
@@ -37,7 +37,7 @@ resources:
     type: OS::Neutron::SecurityGroup
     properties:
       name: sg_service_dns
-      description: Règle pour les serveurs DNS (53).
+      description: Règle pour les serveurs DNS (53)
       rules:
          #1 ingress: TCP|DNS|53|RemoteIPAll
          - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: tcp, port_range_min: 53, port_range_max: 53}
@@ -48,7 +48,7 @@ resources:
     type: OS::Neutron::SecurityGroup
     properties:
       name: sg_icmp
-      description: Autoriser le ping sur la machine cible.
+      description: Autoriser le ping sur la machine cible
       rules:
          #1 ingress: All|ICMP|All|RemoteIPAll
          - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: icmp}
@@ -57,7 +57,7 @@ resources:
     type: OS::Neutron::SecurityGroup
     properties:
       name: sg_all_from_svc_network
-      description: Tout autoriser depuis le réseau dédié aux services d'entreprise.
+      description: Tout autoriser depuis le réseau dédié aux services d'entreprise
       rules:
         #1 ingress: All|All|All|10.10.50.0/24
         - { remote_ip_prefix: 10.10.50.0/24, direction: ingress }
