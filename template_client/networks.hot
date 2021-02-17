@@ -33,7 +33,7 @@ parameters:
   sg_ssh_jumphost:
     type: comma_delimited_list
     description: Les groupes de sécurité à appliquer à ssh_jumphost.
-    default: "ConnexionSSH"
+    default: "sg_ssh"
     constraints:
       - allowed_values: [ sg_rdp, sg_ssh, sg_service_web, sg_service_dns, sg_service_dns, sg_all_from_svc_network ]
 
