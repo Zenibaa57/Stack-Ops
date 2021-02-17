@@ -1,0 +1,17 @@
+heat_template_version: 2018-08-31
+
+description: >
+  Création de tenant
+
+parameters:
+  TENANT_NAME:
+    type: string
+    description: Définition du nom d'un projet
+
+resources:
+ TENANT1:
+    type: OS::Keystone::Project
+    properties:
+      name: { get_param: TENANT_NAME }
+      domain: default
+      description: New Demo Project

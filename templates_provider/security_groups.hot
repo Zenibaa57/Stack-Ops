@@ -4,7 +4,7 @@ description: >
   Création de groupes de sécurité prédéfinis.
 
 resources:
-  SECURITY_GROUP1:
+  sg_rdp:
     type: OS::Neutron::SecurityGroup
     properties:
       name: ConnexionRDP
@@ -15,7 +15,7 @@ resources:
          #1 ingress: TCP/RDP/3389/RemoteIPAll
          - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: tcp, port_range_min: 3389, port_range_max: 3389}
 
-  SECURITY_GROUP2:
+  sg_ssh:
     type: OS::Neutron::SecurityGroup
     properties:
       name: ConnexionSSH
@@ -26,7 +26,7 @@ resources:
          #1 ingress: TCP/SSH/22/RemoteIPAll
          - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: tcp, port_range_min: 22, port_range_max: 22}
 
-  SECURITY_GROUP3:
+  sg_service_web:
     type: OS::Neutron::SecurityGroup
     properties:
       name: ServiceWeb
@@ -39,7 +39,7 @@ resources:
          #2 ingress: TCP/HTTPS/443/RemoteIPAll
          - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: tcp, port_range_min: 443, port_range_max: 443}
 
-  SECURITY_GROUP4:
+  sg_service_dns:
     type: OS::Neutron::SecurityGroup
     properties:
       name: ServiceDNS
@@ -52,7 +52,7 @@ resources:
          #2 ingress: UDP/DNS/53/RemoteIPAll
          - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: udp, port_range_min: 53, port_range_max: 53}
 
-  SECURITY_GROUP5:
+  sg_icmp:
     type: OS::Neutron::SecurityGroup
     properties:
       name: ICMP
@@ -62,4 +62,13 @@ resources:
       rules:
          #1 ingress: ICMP/All/RemoteIPAll
          - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: icmp}
-         
+
+  sg_all_from_services_network:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: sg_all_from_services_network
+      description: >
+        Groupe de sécurité créé :
+        Tous
+      rules:
+        - { remote_ip_prefix: 10.10.50.0/24, direction: ingress }
