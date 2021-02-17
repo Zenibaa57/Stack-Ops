@@ -30,20 +30,6 @@ parameters:
     constraints:
       - allowed_values: [ az1, az2 ]
 
-  sg_ssh_jumphost:
-    type: comma_delimited_list
-    description: Les groupes de sécurité à appliquer à ssh_jumphost.
-    default: "sg_ssh"
-    constraints:
-      - allowed_values: [ sg_rdp, sg_ssh, sg_service_web, sg_service_dns, sg_service_dns, sg_all_from_svc_network ]
-
-  sg_internet_gw:
-    type: comma_delimited_list
-    description: Les groupes de sécurité à appliquer à internet_gw.
-    default: ""
-    constraints:
-      - allowed_values: [ "", sg_rdp, sg_ssh, sg_service_web, sg_service_dns, sg_service_dns, sg_all_from_svc_network ]
-
   ext_network:
     type: string
     description: Le réseau externe à associer au routeur DMZ.
