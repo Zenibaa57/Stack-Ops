@@ -62,3 +62,4 @@ resources:
       rules:
          #1 ingress: ICMP/All/RemoteIPAll
          - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: icmp}
+         
