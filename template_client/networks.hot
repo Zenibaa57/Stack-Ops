@@ -10,7 +10,7 @@ parameters:
     constraints:
     - allowed_values:
       - bionic-server-cloudimg-amd64
-      - focal-server-cloudimg-amd64 ]
+      - focal-server-cloudimg-amd64
 
   availability_zone:
     type: string
@@ -33,7 +33,15 @@ parameters:
     constraints:
     - custom_constraint: nova.keypair
 
+  vol_size:
+    type: string
+    description: La taille des volumes à affecter aux instances internet_gw et ssh_jumphost
+    default: "10"
+    constraints:
+    - allowed_pattern: ^[0-9]{2}$
+
 resources:
+  ### network_dmz ###
   network_dmz:
     type: OS::Neutron::Net
     properties:
@@ -44,10 +52,11 @@ resources:
     properties:
       name: subnet_dmz
       network_id: { get_resource: network_dmz }
-      cidr: 10.10.60.0/24
-      gateway_ip: 10.10.60.1
+      cidr: 192.168.0.128/29
+      gateway_ip: 192.168.0.129
       host_routes:
-      - { nexthop: 10.10.60.254, destination: 10.10.50.0/24 }
+      - { nexthop: 192.168.0.134, destination: 172.16.2.0/23 }
+      - { nexthop: 192.168.0.133, destination: 172.16.4.0/23 }
       dns_nameservers:
       - 8.8.8.8
       - 8.8.4.4
@@ -65,6 +74,47 @@ resources:
       router_id: { get_resource: router_dmz }
       subnet: { get_resource: subnet_dmz }
 
+  ssh_jumphost_floating_ip:
+    type: OS::Neutron::FloatingIP
+    properties:
+      floating_network: external_network
+      floating_subnet: public_subnet
+
+  ssh_jumphost:
+    type: OS::Nova::Server
+    properties:
+      name: ssh_jumphost
+      key_name: { get_param: key_pair }
+      block_device_mapping_v2:
+      - { image: { get_param: image }, volume_size: { get_param: vol_size }, delete_on_termination: true }
+      flavor: { get_param: flavor }
+      availability_zone: { get_param: availability_zone }
+      security_groups:
+      - sg_ssh
+      networks:
+      - { subnet: { get_resource: subnet_dmz }, fixed_ip: 192.168.0.131, floating_ip: { get_resource: ssh_jumphost_floating_ip }}
+
+  internet_gw_floating_ip:
+    type: OS::Neutron::FloatingIP
+    properties:
+      floating_network: external_network
+      floating_subnet: public_subnet
+
+  internet_gw:
+    type: OS::Nova::Server
+    properties:
+      name: internet_gw
+      key_name: { get_param: key_pair }
+      block_device_mapping_v2:
+      - { image: { get_param: image }, volume_size: { get_param: vol_size }, delete_on_termination: true }
+      flavor: { get_param: flavor }
+      availability_zone: { get_param: availability_zone }
+      security_groups:
+      - sg_all_from_svc_network
+      networks:
+      - { subnet: { get_resource: subnet_dmz }, fixed_ip: 192.168.0.132, floating_ip: { get_resource: internet_gw_floating_ip }, port_extra_properties: { allowed_address_pairs: [ { ip_address: 0.0.0.0/0 }]}}
+
+  ### network_services ###
   network_services:
     type: OS::Neutron::Net
     properties:
@@ -75,8 +125,8 @@ resources:
     properties:
       name: subnet_services
       network_id: { get_resource: network_services }
-      cidr: 10.10.50.0/24
-      gateway_ip: 10.10.50.1
+      cidr: 172.16.2.0/23
+      gateway_ip: 172.16.2.1
       dns_nameservers:
       - 8.8.8.8
       - 8.8.4.4
@@ -86,6 +136,13 @@ resources:
     type: OS::Neutron::Router
     properties:
       name: router_services
+
+  router_services_extra_route:
+    type: OS::Neutron::ExtraRoute
+    properties:
+      destination: 0.0.0.0/0
+      nexthop: 192.168.0.132
+      router_id: { get_resource: router_services }
 
   router_if_services_1:
     type: OS::Neutron::RouterInterface
@@ -98,7 +155,7 @@ resources:
     properties:
       network: { get_resource: network_dmz }
       fixed_ips:
-      - ip_address: 10.10.60.254
+      - ip_address: 192.168.0.134
 
   router_if_services_2:
     type: OS::Neutron::RouterInterface
@@ -106,38 +163,4 @@ resources:
       router_id: { get_resource: router_services }
       port: { get_resource: router_port_services }
 
-  ssh_jumphost_floating_ip:
-    type: OS::Neutron::FloatingIP
-    properties:
-      floating_network: external_network
-
-  ssh_jumphost:
-    type: OS::Nova::Server
-    properties:
-      name: ssh_jumphost
-      key_name: { get_param: key_pair }
-      image: { get_param: image }
-      flavor: { get_param: flavor }
-      availability_zone: { get_param: availability_zone }
-      security_groups:
-      - sg_ssh
-      networks:
-      - { subnet: { get_resource: subnet_dmz }, floating_ip: { get_resource: ssh_jumphost_floating_ip }}
-
-  internet_gw_floating_ip:
-    type: OS::Neutron::FloatingIP
-    properties:
-      floating_network: external_network
-
-  internet_gw:
-    type: OS::Nova::Server
-    properties:
-      name: internet_gw
-      key_name: { get_param: key_pair }
-      image: { get_param: image }
-      flavor: { get_param: flavor }
-      availability_zone: { get_param: availability_zone }
-      security_groups:
-      - sg_all_from_svc_network
-      networks:
-      - { subnet: { get_resource: subnet_dmz }, floating_ip: { get_resource: internet_gw_floating_ip }}
+  ### network_admin ###
