@@ -1,32 +1,32 @@
 heat_template_version: 2018-08-31
 
 description: >
-  Création d'une collection de gabarits prédéfinis.
+  Creation d'une collection de gabarits predefinis
 
 parameters:
     customize:
       type: boolean
-      description: Création d'un gabarit personnalisé.
+      description: Creer un gabarit personnalise ?
       default: false
     name:
       type: string
-      description: Nom
+      description: Nom du gabarit personnalise
       default: ""
     disk:
       type: string
-      description: Stockage (GO)
+      description: Espace disque disponible (Go)
       default: ""
       constraints:
         - allowed_pattern: "^[0-9]*$"
     vcpu:
       type: string
-      description: Coeur virtuel
+      description: Coeur virtuel disponible
       default: ""
       constraints:
         - allowed_pattern: "^[0-9]*$"
     ram:
       type: string
-      description: Mémoire vive (MO)
+      description: Memoire vive disponible (mo)
       default: ""
       constraints:
         - allowed_pattern: "^[0-9]*$"
@@ -35,97 +35,97 @@ conditions:
   is_custom: {equals: [{get_param: customize}, true]}
 
 resources:
-  CUSTOM_FLAVOR1:
+  t2.small:
     type: OS::Nova::Flavor
     properties:
-      name: "t2.small"
+      name: t2.small
       disk: 4
       is_public: false
       ram: 1024
       vcpus: 1
 
-  CUSTOM_FLAVOR2:
+  t2.medium:
     type: OS::Nova::Flavor
     properties:
-      name: "t2.medium"
+      name: t2.medium
       disk: 6
       is_public: false
       ram: 2048
       vcpus: 1
 
-  CUSTOM_FLAVOR3:
+  t2.large:
     type: OS::Nova::Flavor
     properties:
-      name: "t2.large"
+      name: t2.large
       disk: 10
       is_public: false
       ram: 2048
       vcpus: 2
 
-  CUSTOM_FLAVOR4:
+  m2.xsmall:
     type: OS::Nova::Flavor
     properties:
-      name: "m2.small"
-      disk: 20
-      is_public: false
-      ram: 2048
-      vcpus: 2
-
-  CUSTOM_FLAVOR5:
-    type: OS::Nova::Flavor
-    properties:
-      name: "m2.medium"
-      disk: 40
-      is_public: false
-      ram: 4096
-      vcpus: 4
-
-  CUSTOM_FLAVOR6:
-    type: OS::Nova::Flavor
-    properties:
-      name: "m2.large"
-      disk: 60
-      is_public: false
-      ram: 8192
-      vcpus: 4
-
-  CUSTOM_FLAVOR7:
-    type: OS::Nova::Flavor
-    properties:
-      name: "l2.small"
-      disk: 100
-      is_public: false
-      ram: 8192
-      vcpus: 4
-
-  CUSTOM_FLAVOR8:
-    type: OS::Nova::Flavor
-    properties:
-      name: "l2.medium"
-      disk: 150
-      is_public: false
-      ram: 8192
-      vcpus: 6
-
-  CUSTOM_FLAVOR9:
-    type: OS::Nova::Flavor
-    properties:
-      name: "l2.large"
-      disk: 250
-      is_public: false
-      ram: 16384
-      vcpus: 8
-
-  CUSTOM_FLAVOR10:
-    type: OS::Nova::Flavor
-    properties:
-      name: "m2.xsmall"
+      name: m2.xsmall
       disk: 10
       is_public: false
       ram: 1024
       vcpus: 1
 
-  CUSTOM_FLAVORX:
+  m2.small:
+    type: OS::Nova::Flavor
+    properties:
+      name: m2.small
+      disk: 20
+      is_public: false
+      ram: 2048
+      vcpus: 2
+
+  m2.medium:
+    type: OS::Nova::Flavor
+    properties:
+      name: m2.medium
+      disk: 40
+      is_public: false
+      ram: 4096
+      vcpus: 4
+
+  m2.large:
+    type: OS::Nova::Flavor
+    properties:
+      name: m2.large
+      disk: 60
+      is_public: false
+      ram: 8192
+      vcpus: 4
+
+  l2.small:
+    type: OS::Nova::Flavor
+    properties:
+      name: l2.small
+      disk: 100
+      is_public: false
+      ram: 8192
+      vcpus: 4
+
+  l2.medium:
+    type: OS::Nova::Flavor
+    properties:
+      name: l2.medium
+      disk: 150
+      is_public: false
+      ram: 8192
+      vcpus: 6
+
+  l2.large:
+    type: OS::Nova::Flavor
+    properties:
+      name: l2.large
+      disk: 250
+      is_public: false
+      ram: 16384
+      vcpus: 8
+
+  custom.flavor:
     type: OS::Nova::Flavor
     condition: is_custom
     properties:

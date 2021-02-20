@@ -1,11 +1,11 @@
 heat_template_version: 2018-08-31
 
-description: Création de toute la stack réseau
+description: Creation de toute la stack reseau
 
 parameters:
   image:
     type: string
-    description: L'image à utiliser pour créer les instances internet_gw et ssh_jumphost
+    description: L'image a utiliser pour creer les instances internet_gw et ssh_jumphost
     default: bionic-server-cloudimg-amd64
     constraints:
     - allowed_values:
@@ -14,7 +14,7 @@ parameters:
 
   availability_zone:
     type: string
-    description: La zone de disponibilité pour les instances internet_gw et ssh_jumphost
+    description: La zone de disponibilite pour les instances internet_gw et ssh_jumphost
     default: az1
     constraints:
     - allowed_values:
@@ -23,45 +23,25 @@ parameters:
 
   flavor:
     type: string
-    description: Le gabarit à utiliser pour créer les instances internet_gw et ssh_jumphost
+    description: Le gabarit a utiliser pour creer les instances internet_gw et ssh_jumphost
     constraints:
     - custom_constraint: nova.flavor
 
   key_pair:
     type: string
-    description: La paire de clés à utiliser pour les instances internet_gw et ssh_jumphost
+    description: La paire de cles a utiliser pour les instances internet_gw et ssh_jumphost
     constraints:
     - custom_constraint: nova.keypair
 
   vol_size:
     type: string
-    description: La taille des volumes à affecter aux instances internet_gw et ssh_jumphost
+    description: La taille des volumes a affecter aux instances internet_gw et ssh_jumphost
     default: "10"
     constraints:
     - allowed_pattern: ^[0-9]{2}$
 
 resources:
   ### network_dmz ###
-  network_dmz:
-    type: OS::Neutron::Net
-    properties:
-      name: network_dmz
-
-  subnet_dmz:
-    type: OS::Neutron::Subnet
-    properties:
-      name: subnet_dmz
-      network_id: { get_resource: network_dmz }
-      cidr: 192.168.0.128/29
-      gateway_ip: 192.168.0.129
-      host_routes:
-      - { nexthop: 192.168.0.134, destination: 172.16.2.0/23 }
-      - { nexthop: 192.168.0.133, destination: 172.16.4.0/23 }
-      dns_nameservers:
-      - 8.8.8.8
-      - 8.8.4.4
-      ip_version: 4
-
   router_dmz:
     type: OS::Neutron::Router
     properties:
@@ -74,11 +54,48 @@ resources:
       router_id: { get_resource: router_dmz }
       subnet: { get_resource: subnet_dmz }
 
+  network_dmz:
+    type: OS::Neutron::Net
+    properties:
+      name: network_dmz
+
+  subnet_dmz:
+    type: OS::Neutron::Subnet
+    properties:
+      name: subnet_dmz
+      network_id: { get_resource: network_dmz }
+      cidr: 192.168.0.128/28
+      gateway_ip: 192.168.0.129
+      host_routes:
+      - { nexthop: 192.168.0.142, destination: 172.16.2.0/23 }
+      - { nexthop: 192.168.0.142, destination: 172.16.4.0/23 }
+      dns_nameservers:
+      # - 172.16.2.x (ip du serveur dns interne)
+      - 8.8.8.8
+      - 8.8.4.4
+      ip_version: 4
+
+  ssh_jumphost_port:
+    type: OS::Neutron::Port
+    properties:
+      name: ssh_jumphost_port
+      network: { get_resource: network_dmz }
+      fixed_ips:
+      - { subnet: { get_resource: subnet_dmz }, ip_address: 192.168.0.131 }
+      security_groups:
+      - sg_ssh
+
   ssh_jumphost_floating_ip:
     type: OS::Neutron::FloatingIP
     properties:
       floating_network: external_network
       floating_subnet: public_subnet
+
+  ssh_jumphost_ip_association:
+    type: OS::Neutron::FloatingIPAssociation
+    properties:
+      floatingip_id: { get_resource: ssh_jumphost_floating_ip }
+      port_id: { get_resource: ssh_jumphost_port }
 
   ssh_jumphost:
     type: OS::Nova::Server
@@ -89,16 +106,42 @@ resources:
       - { image: { get_param: image }, volume_size: { get_param: vol_size }, delete_on_termination: true }
       flavor: { get_param: flavor }
       availability_zone: { get_param: availability_zone }
-      security_groups:
-      - sg_ssh
       networks:
-      - { subnet: { get_resource: subnet_dmz }, fixed_ip: 192.168.0.131, floating_ip: { get_resource: ssh_jumphost_floating_ip }}
+      - port: { get_resource: ssh_jumphost_port }
+
+  internet_gw_port:
+    type: OS::Neutron::Port
+    properties:
+      name: internet_gw_port
+      network: { get_resource: network_dmz }
+      fixed_ips:
+      - { subnet: { get_resource: subnet_dmz }, ip_address: 192.168.0.132 }
+      allowed_address_pairs:
+      - ip_address: 0.0.0.0/0
+      security_groups:
+      - sg_all_from_svc_network
+      - sg_all_from_adm_network
 
   internet_gw_floating_ip:
     type: OS::Neutron::FloatingIP
     properties:
       floating_network: external_network
       floating_subnet: public_subnet
+
+  internet_gw_ip_association:
+    type: OS::Neutron::FloatingIPAssociation
+    properties:
+      floatingip_id: { get_resource: internet_gw_floating_ip }
+      port_id: { get_resource: internet_gw_port }
+
+  internet_gw_boot_config:
+    type: OS::Heat::CloudConfig
+    properties:
+      cloud_config:
+        runcmd:
+        - echo 1 > /proc/sys/net/ipv4/ip_forward
+        - iptables -t nat -A POSTROUTING -o ens3 -s 172.16.2.0/23 -j MASQUERADE
+        - iptables -t nat -A POSTROUTING -o ens3 -s 172.16.4.0/23 -j MASQUERADE
 
   internet_gw:
     type: OS::Nova::Server
@@ -109,10 +152,49 @@ resources:
       - { image: { get_param: image }, volume_size: { get_param: vol_size }, delete_on_termination: true }
       flavor: { get_param: flavor }
       availability_zone: { get_param: availability_zone }
-      security_groups:
-      - sg_all_from_svc_network
       networks:
-      - { subnet: { get_resource: subnet_dmz }, fixed_ip: 192.168.0.132, floating_ip: { get_resource: internet_gw_floating_ip }, port_extra_properties: { allowed_address_pairs: [ { ip_address: 0.0.0.0/0 }]}}
+      - port: { get_resource: internet_gw_port }
+      user_data_format: SOFTWARE_CONFIG
+      user_data: { get_resource: internet_gw_boot_config }
+
+  ### router_in_the_middle ###
+  router_in_the_middle:
+    type: OS::Neutron::Router
+    properties:
+      name: router_in_the_middle
+
+  router_in_the_middle_extra_route:
+    type: OS::Neutron::ExtraRoute
+    properties:
+      destination: 0.0.0.0/0
+      nexthop: 192.168.0.132
+      router_id: { get_resource: router_in_the_middle }
+
+  router_in_the_middle_port_dmz:
+    type: OS::Neutron::Port
+    properties:
+      name: router_in_the_middle_port_dmz
+      network: { get_resource: network_dmz }
+      fixed_ips:
+      - ip_address: 192.168.0.142
+
+  router_in_the_middle_if_dmz:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: router_in_the_middle }
+      port: { get_resource: router_in_the_middle_port_dmz }
+
+  router_in_the_middle_if_svc:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: router_in_the_middle }
+      subnet: { get_resource: subnet_services }
+
+  router_in_the_middle_if_adm:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: router_in_the_middle }
+      subnet: { get_resource: subnet_admin }
 
   ### network_services ###
   network_services:
@@ -128,39 +210,26 @@ resources:
       cidr: 172.16.2.0/23
       gateway_ip: 172.16.2.1
       dns_nameservers:
+      # - 172.16.2.x (ip du serveur dns interne)
       - 8.8.8.8
       - 8.8.4.4
       ip_version: 4
 
-  router_services:
-    type: OS::Neutron::Router
-    properties:
-      name: router_services
-
-  router_services_extra_route:
-    type: OS::Neutron::ExtraRoute
-    properties:
-      destination: 0.0.0.0/0
-      nexthop: 192.168.0.132
-      router_id: { get_resource: router_services }
-
-  router_if_services_1:
-    type: OS::Neutron::RouterInterface
-    properties:
-      router_id: { get_resource: router_services }
-      subnet: { get_resource: subnet_services }
-
-  router_port_services:
-    type: OS::Neutron::Port
-    properties:
-      network: { get_resource: network_dmz }
-      fixed_ips:
-      - ip_address: 192.168.0.134
-
-  router_if_services_2:
-    type: OS::Neutron::RouterInterface
-    properties:
-      router_id: { get_resource: router_services }
-      port: { get_resource: router_port_services }
-
   ### network_admin ###
+  network_admin:
+    type: OS::Neutron::Net
+    properties:
+      name: network_admin
+
+  subnet_admin:
+    type: OS::Neutron::Subnet
+    properties:
+      name: subnet_admin
+      network_id: { get_resource: network_admin }
+      cidr: 172.16.4.0/23
+      gateway_ip: 172.16.4.1
+      dns_nameservers:
+      # - 172.16.2.x (ip du serveur dns interne)
+      - 8.8.8.8
+      - 8.8.4.4
+      ip_version: 4
