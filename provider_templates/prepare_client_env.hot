@@ -1,7 +1,6 @@
 heat_template_version: 2018-08-31
 
-description: >
-  Création de tenant
+description: Preparation de l'environnement client
 
 parameters:
   TENANT_NAME:

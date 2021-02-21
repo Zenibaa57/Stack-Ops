@@ -193,8 +193,8 @@ resources:
       - { subnet: { get_resource: subnet_services }, ip_address: 172.16.2.1 }
       security_groups:
       - sg_ssh_from_adm_network
-      - sg_service_web
-      - sg_service_dns
+      - sg_web_service
+      - sg_dns_service
       - sg_icmp
       - sg_ntp
 

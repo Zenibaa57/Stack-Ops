@@ -1,7 +1,6 @@
 heat_template_version: 2018-08-31
 
-description: >
-  Creation d'une collection de gabarits predefinis
+description: Creation d'une collection de gabarits predefinis
 
 parameters:
     customize:
@@ -17,22 +16,22 @@ parameters:
       description: Espace disque disponible (Go)
       default: ""
       constraints:
-        - allowed_pattern: "^[0-9]*$"
+      - allowed_pattern: ^[0-9]*$
     vcpu:
       type: string
       description: Coeur virtuel disponible
       default: ""
       constraints:
-        - allowed_pattern: "^[0-9]*$"
+      - allowed_pattern: ^[0-9]*$
     ram:
       type: string
       description: Memoire vive disponible (mo)
       default: ""
       constraints:
-        - allowed_pattern: "^[0-9]*$"
+      - allowed_pattern: ^[0-9]*$
 
 conditions:
-  is_custom: {equals: [{get_param: customize}, true]}
+  is_custom: { equals: [{ get_param: customize }, true ]}
 
 resources:
   t2.small:
@@ -129,8 +128,8 @@ resources:
     type: OS::Nova::Flavor
     condition: is_custom
     properties:
-      name: {get_param: name}
-      disk: {get_param: disk}
+      name: { get_param: name }
+      disk: { get_param: disk }
       is_public: true
-      ram: {get_param: ram}
-      vcpus: {get_param: vcpu}
+      ram: { get_param: ram }
+      vcpus: { get_param: vcpu }
