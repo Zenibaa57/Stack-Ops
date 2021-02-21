@@ -1,6 +1,6 @@
 heat_template_version: 2018-08-31
 
-description: Preparation de l'environnement client
+description: Preparation of the customer environment
 
 parameters:
   TENANT_NAME:

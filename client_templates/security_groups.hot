@@ -1,21 +1,21 @@
 heat_template_version: 2018-08-31
 
-description: Creation de groupes de securite predefinis
+description: Creation of predefined security groups
 
 resources:
   sg_ntp:
     type: OS::Neutron::SecurityGroup
     properties:
       name: sg_ntp
-      description: Autoriser les connexions distantes via le protocol RDP (3389)
+      description: Allow remote connections via the NTP protocol
       rules:
-      - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: tcp, port_range_min: 3389, port_range_max: 3389 }
+      - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: udp, port_range_min: 123, port_range_max: 123 }
 
   sg_ssh:
     type: OS::Neutron::SecurityGroup
     properties:
       name: sg_ssh
-      description: Autoriser les connexions distantes via le protocol SSH (22)
+      description: Allow remote connections via the SSH protocol
       rules:
       - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: tcp, port_range_min: 22, port_range_max: 22 }
 
@@ -23,7 +23,7 @@ resources:
     type: OS::Neutron::SecurityGroup
     properties:
       name: sg_ssh_from_adm_network
-      description: Autoriser les connexions distantes via le protocol SSH (22) depuis le reseau admin
+      description: Allow remote connections via the SSH protocol from the admin network
       rules:
       - { remote_ip_prefix: 172.16.4.0/23, direction: ingress, protocol: tcp, port_range_min: 22, port_range_max: 22 }
 
@@ -31,7 +31,7 @@ resources:
     type: OS::Neutron::SecurityGroup
     properties:
       name: sg_service_web
-      description: Autoriser les connexions distantes via le protocol HTTP et HTTPS (80 et 443)
+      description: Allow remote connections via the HTTP and HTTPS protocols
       rules:
       - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: tcp, port_range_min: 80, port_range_max: 80 }
       - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: tcp, port_range_min: 443, port_range_max: 443 }
@@ -40,7 +40,7 @@ resources:
     type: OS::Neutron::SecurityGroup
     properties:
       name: sg_service_dns
-      description: Regle pour les serveurs DNS (53)
+      description: Allow remote connections via the DNS protocol
       rules:
       - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: tcp, port_range_min: 53, port_range_max: 53 }
       - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: udp, port_range_min: 53, port_range_max: 53 }
@@ -49,7 +49,7 @@ resources:
     type: OS::Neutron::SecurityGroup
     properties:
       name: sg_icmp
-      description: Autoriser le ping
+      description: Allow remote connections via the ICMP protocol
       rules:
       - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: icmp }
 
@@ -57,7 +57,7 @@ resources:
     type: OS::Neutron::SecurityGroup
     properties:
       name: sg_all_from_svc_network
-      description: Tout autoriser depuis le reseau dedie aux services d'entreprise
+      description: Authorize everything from the corporate services network
       rules:
       - { remote_ip_prefix: 172.16.2.0/23, direction: ingress }
 
@@ -65,6 +65,6 @@ resources:
     type: OS::Neutron::SecurityGroup
     properties:
       name: sg_all_from_adm_network
-      description: Tout autoriser depuis le reseau admin de l'entreprise
+      description: Authorize everything from the company's admin network
       rules:
       - { remote_ip_prefix: 172.16.4.0/23, direction: ingress }

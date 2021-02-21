@@ -1,11 +1,11 @@
 heat_template_version: 2018-08-31
 
-description: Creation de toute la stack reseau
+description: Creation of the entire network stack
 
 parameters:
   image:
     type: string
-    description: L'image a utiliser pour creer les instances internet_gw et ssh_jumphost
+    description: The image to use to create the internet_gw and ssh_jumphost instances
     default: bionic-server-cloudimg-amd64
     constraints:
     - allowed_values:
@@ -14,7 +14,7 @@ parameters:
 
   availability_zone:
     type: string
-    description: La zone de disponibilite pour les instances internet_gw et ssh_jumphost
+    description: The availability zone for the internet_gw and ssh_jumphost instances
     default: az1
     constraints:
     - allowed_values:
@@ -23,19 +23,19 @@ parameters:
 
   flavor:
     type: string
-    description: Le gabarit a utiliser pour creer les instances internet_gw et ssh_jumphost
+    description: The flavor to use to create the internet_gw and ssh_jumphost instances
     constraints:
     - custom_constraint: nova.flavor
 
   key_pair:
     type: string
-    description: La paire de cles a utiliser pour les instances internet_gw et ssh_jumphost
+    description: The key pair to use for the internet_gw and ssh_jumphost instances
     constraints:
     - custom_constraint: nova.keypair
 
   vol_size:
     type: string
-    description: La taille des volumes a affecter aux instances internet_gw et ssh_jumphost
+    description: The size of the volumes to assign to the internet_gw and ssh_jumphost instances
     default: "10"
     constraints:
     - allowed_pattern: ^[0-9]{2}$

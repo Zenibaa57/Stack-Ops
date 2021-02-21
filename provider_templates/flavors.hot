@@ -1,31 +1,31 @@
 heat_template_version: 2018-08-31
 
-description: Creation d'une collection de gabarits predefinis
+description: Creation of a collection of predefined flavors
 
 parameters:
     customize:
       type: boolean
-      description: Creer un gabarit personnalise ?
+      description: Do you want to create a custom flavor ?
       default: false
     name:
       type: string
-      description: Nom du gabarit personnalise
+      description: Name of the custom flavor
       default: ""
     disk:
       type: string
-      description: Espace disque disponible (Go)
+      description: Disk size of the custom flavor
       default: ""
       constraints:
       - allowed_pattern: ^[0-9]*$
     vcpu:
       type: string
-      description: Coeur virtuel disponible
+      description: Number of virtual core for the custom flavor
       default: ""
       constraints:
       - allowed_pattern: ^[0-9]*$
     ram:
       type: string
-      description: Memoire vive disponible (mo)
+      description: RAM value for the custom flavor
       default: ""
       constraints:
       - allowed_pattern: ^[0-9]*$
