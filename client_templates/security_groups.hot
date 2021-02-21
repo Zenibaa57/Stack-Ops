@@ -30,7 +30,7 @@ resources:
   sg_web_service:
     type: OS::Neutron::SecurityGroup
     properties:
-      name: sg_service_web
+      name: sg_web_service
       description: Allow remote connections via the HTTP and HTTPS protocols
       rules:
       - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: tcp, port_range_min: 80, port_range_max: 80 }
@@ -39,7 +39,7 @@ resources:
   sg_dns_service:
     type: OS::Neutron::SecurityGroup
     properties:
-      name: sg_service_dns
+      name: sg_dns_service
       description: Allow remote connections via the DNS protocol
       rules:
       - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: tcp, port_range_min: 53, port_range_max: 53 }
