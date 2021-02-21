@@ -176,7 +176,7 @@ resources:
       name: router_in_the_middle_port_dmz
       network: { get_resource: network_dmz }
       fixed_ips:
-      - ip_address: 192.168.0.142
+      - { subnet: { get_resource: subnet_dmz }, ip_address: 192.168.0.142 }
 
   router_in_the_middle_if_dmz:
     type: OS::Neutron::RouterInterface
@@ -184,11 +184,25 @@ resources:
       router_id: { get_resource: router_in_the_middle }
       port: { get_resource: router_in_the_middle_port_dmz }
 
+  router_in_the_middle_port_svc:
+    type: OS::Neutron::Port
+    properties:
+      name: router_in_the_middle_port_svc
+      network: { get_resource: network_services }
+      fixed_ips:
+      - { subnet: { get_resource: subnet_services }, ip_address: 172.16.2.1 }
+      security_groups:
+      - sg_ssh_from_adm_network
+      - sg_service_web
+      - sg_service_dns
+      - sg_icmp
+      - sg_ntp
+
   router_in_the_middle_if_svc:
     type: OS::Neutron::RouterInterface
     properties:
       router_id: { get_resource: router_in_the_middle }
-      subnet: { get_resource: subnet_services }
+      port: { get_resource: router_in_the_middle_port_svc }
 
   router_in_the_middle_if_adm:
     type: OS::Neutron::RouterInterface
