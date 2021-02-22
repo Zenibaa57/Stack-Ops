@@ -12,7 +12,7 @@ parameters:
     description: Name of the admin account in the client tenant
 
   keypair_name:
-    type:
+    type: string
     description: Name of the keypair for the admin account
 
 resources:
@@ -20,6 +20,7 @@ resources:
     type: OS::Keystone::Project
     properties:
       name: { get_param: tenant_name }
+      parent: admin
 
   random_string:
     type: OS::Heat::RandomString
@@ -31,33 +32,28 @@ resources:
     properties:
       name: { get_param: admin_name }
       password: { get_resource: random_string }
-      default_project: { get_param: tenant_name }
+      default_project: { get_resource: client_tenant }
+      roles:
+      - { role: admin, project: { get_resource: client_tenant }}
 
   admin_keypair:
     type: OS::Nova::KeyPair
     properties:
       name: { get_param: keypair_name }
-      type: ssh
-      user: { get_resource: client_tenant_admin_user }
+      user: { get_resource: admin_user }
+      save_private_key: true
 
 outputs:
-  client_tenant_info:
-    description: Information of the client tenant
+  admin_user_password:
+    description: Password of the admin user in the client tenant
     value:
       get_attr:
-      - client_tenant
-      - show
+      - random_string
+      - value
 
-  admin_user_info:
-    description: Information of the admin user in the client tenant
-    value:
-      get_attr:
-      - admin_user
-      - show
-
-  admin_user_keypair_info:
-    description: Information of the admin user keypair
+  admin_user_private_key:
+    description: Private key value of the admin user
     value:
       get_attr:
       - admin_keypair
-      - show
+      - private_key
