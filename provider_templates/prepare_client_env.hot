@@ -45,19 +45,19 @@ outputs:
     description: Information of the client tenant
     value:
       get_attr:
-        - client_tenant
-        - show
+      - client_tenant
+      - show
 
   admin_user_info:
     description: Information of the admin user in the client tenant
     value:
       get_attr:
-        - admin_user
-        - show
+      - admin_user
+      - show
 
   admin_user_keypair_info:
     description: Information of the admin user keypair
     value:
       get_attr:
-        - admin_keypair
-        - show
+      - admin_keypair
+      - show
