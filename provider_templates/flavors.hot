@@ -7,22 +7,26 @@ parameters:
       type: boolean
       description: Do you want to create a custom flavor ?
       default: false
+
     name:
       type: string
       description: Name of the custom flavor
       default: ""
+
     disk:
       type: string
       description: Disk size of the custom flavor
       default: ""
       constraints:
       - allowed_pattern: ^[0-9]*$
+
     vcpu:
       type: string
       description: Number of virtual core for the custom flavor
       default: ""
       constraints:
       - allowed_pattern: ^[0-9]*$
+      
     ram:
       type: string
       description: RAM value for the custom flavor

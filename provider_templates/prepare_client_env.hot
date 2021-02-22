@@ -3,14 +3,61 @@ heat_template_version: 2018-08-31
 description: Preparation of the customer environment
 
 parameters:
-  TENANT_NAME:
+  tenant_name:
     type: string
-    description: Définition du nom d'un projet
+    description: Name of the client tenant
+
+  admin_name:
+    type: string
+    description: Name of the admin account in the client tenant
+
+  keypair_name:
+    type:
+    description: Name of the keypair for the admin account
 
 resources:
- TENANT1:
+  client_tenant:
     type: OS::Keystone::Project
     properties:
-      name: { get_param: TENANT_NAME }
-      domain: default
-      description: New Demo Project
+      name: { get_param: tenant_name }
+
+  random_string:
+    type: OS::Heat::RandomString
+    properties:
+      length: 12
+
+  admin_user:
+    type: OS::Keystone::User
+    properties:
+      name: { get_param: admin_name }
+      password: { get_resource: random_string }
+      default_project: { get_param: tenant_name }
+
+  admin_keypair:
+    type: OS::Nova::KeyPair
+    properties:
+      name: { get_param: keypair_name }
+      type: ssh
+      user: { get_resource: client_tenant_admin_user }
+
+outputs:
+  client_tenant_info:
+    description: Information of the client tenant
+    value:
+      get_attr:
+        - client_tenant
+        - show
+
+  admin_user_info:
+    description: Information of the admin user in the client tenant
+    value:
+      get_attr:
+        - admin_user
+        - show
+
+  admin_user_keypair_info:
+    description: Information of the admin user keypair
+    value:
+      get_attr:
+        - admin_keypair
+        - show
