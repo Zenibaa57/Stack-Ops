@@ -1,0 +1,59 @@
+heat_template_version: 2018-08-31
+
+description: Preparation of the customer environment
+
+parameters:
+  tenant_name:
+    type: string
+    description: Name of the client tenant
+
+  admin_name:
+    type: string
+    description: Name of the admin account in the client tenant
+
+  keypair_name:
+    type: string
+    description: Name of the keypair for the admin account
+
+resources:
+  client_tenant:
+    type: OS::Keystone::Project
+    properties:
+      name: { get_param: tenant_name }
+      parent: admin
+
+  random_string:
+    type: OS::Heat::RandomString
+    properties:
+      length: 12
+
+  admin_user:
+    type: OS::Keystone::User
+    properties:
+      name: { get_param: admin_name }
+      password: { get_resource: random_string }
+      default_project: { get_resource: client_tenant }
+      roles:
+      - { role: admin, project: { get_resource: client_tenant }}
+
+  admin_keypair:
+    type: OS::Nova::KeyPair
+    properties:
+      name: { get_param: keypair_name }
+      user: { get_resource: admin_user }
+      save_private_key: true
+
+outputs:
+  admin_user_password:
+    description: Password of the admin user in the client tenant
+    value:
+      get_attr:
+      - random_string
+      - value
+
+  admin_user_private_key:
+    description: Private key value of the admin user
+    value:
+      get_attr:
+      - admin_keypair
+      - private_key

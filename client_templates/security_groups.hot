@@ -1,0 +1,70 @@
+heat_template_version: 2018-08-31
+
+description: Creation of predefined security groups
+
+resources:
+  sg_ntp:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: sg_ntp
+      description: Allow remote connections via the NTP protocol
+      rules:
+      - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: udp, port_range_min: 123, port_range_max: 123 }
+
+  sg_ssh:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: sg_ssh
+      description: Allow remote connections via the SSH protocol
+      rules:
+      - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: tcp, port_range_min: 22, port_range_max: 22 }
+
+  sg_ssh_from_adm_network:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: sg_ssh_from_adm_network
+      description: Allow remote connections via the SSH protocol from the admin network
+      rules:
+      - { remote_ip_prefix: 172.16.4.0/23, direction: ingress, protocol: tcp, port_range_min: 22, port_range_max: 22 }
+
+  sg_web_service:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: sg_web_service
+      description: Allow remote connections via the HTTP and HTTPS protocols
+      rules:
+      - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: tcp, port_range_min: 80, port_range_max: 80 }
+      - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: tcp, port_range_min: 443, port_range_max: 443 }
+
+  sg_dns_service:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: sg_dns_service
+      description: Allow remote connections via the DNS protocol
+      rules:
+      - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: tcp, port_range_min: 53, port_range_max: 53 }
+      - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: udp, port_range_min: 53, port_range_max: 53 }
+
+  sg_icmp:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: sg_icmp
+      description: Allow remote connections via the ICMP protocol
+      rules:
+      - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: icmp }
+
+  sg_all_from_svc_network:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: sg_all_from_svc_network
+      description: Authorize everything from the corporate services network
+      rules:
+      - { remote_ip_prefix: 172.16.2.0/23, direction: ingress }
+
+  sg_all_from_adm_network:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: sg_all_from_adm_network
+      description: Authorize everything from the company's admin network
+      rules:
+      - { remote_ip_prefix: 172.16.4.0/23, direction: ingress }

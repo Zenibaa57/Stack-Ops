@@ -1,0 +1,139 @@
+heat_template_version: 2018-08-31
+
+description: Creation of a collection of predefined flavors
+
+parameters:
+    customize:
+      type: boolean
+      description: Do you want to create a custom flavor ?
+      default: false
+
+    name:
+      type: string
+      description: Name of the custom flavor
+      default: ""
+
+    disk:
+      type: string
+      description: Disk size of the custom flavor
+      default: ""
+      constraints:
+      - allowed_pattern: ^[0-9]*$
+
+    vcpu:
+      type: string
+      description: Number of virtual core for the custom flavor
+      default: ""
+      constraints:
+      - allowed_pattern: ^[0-9]*$
+      
+    ram:
+      type: string
+      description: RAM value for the custom flavor
+      default: ""
+      constraints:
+      - allowed_pattern: ^[0-9]*$
+
+conditions:
+  is_custom: { equals: [{ get_param: customize }, true ]}
+
+resources:
+  t2.small:
+    type: OS::Nova::Flavor
+    properties:
+      name: t2.small
+      disk: 4
+      is_public: true
+      ram: 1024
+      vcpus: 1
+
+  t2.medium:
+    type: OS::Nova::Flavor
+    properties:
+      name: t2.medium
+      disk: 6
+      is_public: true
+      ram: 2048
+      vcpus: 1
+
+  t2.large:
+    type: OS::Nova::Flavor
+    properties:
+      name: t2.large
+      disk: 10
+      is_public: true
+      ram: 2048
+      vcpus: 2
+
+  m2.xsmall:
+    type: OS::Nova::Flavor
+    properties:
+      name: m2.xsmall
+      disk: 10
+      is_public: true
+      ram: 1024
+      vcpus: 1
+
+  m2.small:
+    type: OS::Nova::Flavor
+    properties:
+      name: m2.small
+      disk: 20
+      is_public: true
+      ram: 2048
+      vcpus: 2
+
+  m2.medium:
+    type: OS::Nova::Flavor
+    properties:
+      name: m2.medium
+      disk: 40
+      is_public: true
+      ram: 4096
+      vcpus: 4
+
+  m2.large:
+    type: OS::Nova::Flavor
+    properties:
+      name: m2.large
+      disk: 60
+      is_public: true
+      ram: 8192
+      vcpus: 4
+
+  l2.small:
+    type: OS::Nova::Flavor
+    properties:
+      name: l2.small
+      disk: 100
+      is_public: true
+      ram: 8192
+      vcpus: 4
+
+  l2.medium:
+    type: OS::Nova::Flavor
+    properties:
+      name: l2.medium
+      disk: 150
+      is_public: true
+      ram: 8192
+      vcpus: 6
+
+  l2.large:
+    type: OS::Nova::Flavor
+    properties:
+      name: l2.large
+      disk: 250
+      is_public: true
+      ram: 16384
+      vcpus: 8
+
+  custom.flavor:
+    type: OS::Nova::Flavor
+    condition: is_custom
+    properties:
+      name: { get_param: name }
+      disk: { get_param: disk }
+      is_public: true
+      ram: { get_param: ram }
+      vcpus: { get_param: vcpu }
