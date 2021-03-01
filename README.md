@@ -20,7 +20,7 @@
 
 
 
-<img src="https://imgur.com/wpuuXzH.png" width="600" height="626">
+<img src="https://imgur.com/wpuuXzH.png" width="700" height="730">
 
 
 
