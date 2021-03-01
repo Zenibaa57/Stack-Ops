@@ -18,11 +18,9 @@
 
 # Client tenant infrastructure
 
-<div align="center"><img src="https://imgur.com/wpuuXzH.png" width="700" height="730"></div>
+<div align="center"><img src="https://imgur.com/wpuuXzH.png" width="700" height="730"></div><br/>
 
-```
-<br/>
-```
+
 
 For additional information :
 
