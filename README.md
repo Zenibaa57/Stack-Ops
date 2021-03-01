@@ -27,10 +27,7 @@ For additional information about instances network configuration:
 | **Availability zone**     |            az2            |                         az2                         |            az2            |            az1            |           az1           |
 | **Allowed address pairs** |            no             |                        yes*                         |            no             |            no             |           no            |
 
-[^]: (*) destination: 172.16.2.0/23 172.16.4.0/23, nexthop: 192.168.0.142
-[^]: (**) ip_address: 0.0.0.0, mac_address: not_defined (by default - its own)
-
-(*) destination: 172.16.2.0/23 172.16.4.0/23, nexthop: 192.168.0.142<br/>(**) ip_address: 0.0.0.0, mac_address: not_defined (by default - its own)<br/><br/>
+###### (*) destination: 172.16.2.0/23 172.16.4.0/23, nexthop: 192.168.0.142<br/>(**) ip_address: 0.0.0.0, mac_address: not_defined (by default - its own)<br/><br/>
 
 # Simplified RACI
 
@@ -54,4 +51,5 @@ For additional information about instances network configuration:
 | **Adding new services in the client project**                |                  |    x     |
 | **Adding new security groups in the client project**         |                  |    x     |
 
-(*) Can be automated via Heat (OpenStack orchestration)
+###### (*) Can be automated via Heat (OpenStack orchestration)
+
