@@ -45,9 +45,10 @@ For additional information about instances network configuration:
 | **Creation of predefined security groups in the client project*** |                  |    x     |
 | **Creation of the entire network stack in the client project*** |                  |    x     |
 | **Creation of all the basic services in the client project*** |                  |    x     |
-| **Adding new users in the client project**                   |                  |    x     |
-| **Adding new keypairs in the client project**                |                  |    x     |
-| **Adding new services in the client project**                |                  |    x     |
-| **Adding new security groups in the client project**         |                  |    x     |
+| **Addition of new users in the client project**              |                  |    x     |
+| **Addition of new keypairs in the client project**           |                  |    x     |
+| **Addition and configuration of new networks and subnets in the client project** |                  |    x     |
+| **Addition of new security groups in the client project**    |                  |    x     |
+| **Addition of new services in the client project**           |                  |    x     |
 
 ###### (*) Can be automated via Heat (OpenStack orchestration)
