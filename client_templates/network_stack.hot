@@ -233,3 +233,18 @@ resources:
       - 8.8.8.8
       - 8.8.4.4
       ip_version: 4
+
+outputs:
+  dmz_network_info:
+    description: Detailed information about the DMZ network
+    value:
+      get_attr:
+      - network_dmz
+      - show
+
+  admin_network_info:
+    description: Detailed information about the admin network
+    value:
+      get_attr:
+      - network_admin
+      - show
