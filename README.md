@@ -52,4 +52,3 @@ For additional information about instances network configuration:
 | **Adding new security groups in the client project**         |                  |    x     |
 
 ###### (*) Can be automated via Heat (OpenStack orchestration)
-
