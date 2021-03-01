@@ -15,4 +15,17 @@
 * [`Horizon`](https://opendev.org/openstack/puppet-horizon/) - (Dashboard)
 
 
-<img src="https://imgur.com/wpuuXzH.png" alt="Imgur" style="zoom: 10%;" />
+
+# Client tenant infrastructure
+
+
+
+<img src="https://imgur.com/wpuuXzH.png" width="500" height="522">
+
+
+
+|      |      |      |
+| :--- | ---- | ---- |
+|      |      |      |
+|      |      |      |
+|      |      |      |
