@@ -18,18 +18,15 @@
 
 # Client tenant infrastructure
 
-
-
 <div align="center"><img src="https://imgur.com/wpuuXzH.png" width="700" height="730"></div>
 
 
 
-
-
-
-
-| dzadadzadaz | dzadaz | dzadazdadaad |
-| :---------- | ------ | ------------ |
-|             |        |              |
-|             |        |              |
-|             |        |              |
+|                           | *ssh_jumphost* | *internet_gw* | *ntp_server* | *ldap_server* | *dns_server* |
+| :------------------------ | -------------- | ------------- | ------------ | ------------- | ------------ |
+| **Floating IP**           |                |               |              |               |              |
+| **Routes**                |                |               |              |               |              |
+| **DNS servers**           |                |               |              |               |              |
+| **Security group**        |                |               |              |               |              |
+| **Availability zone**     |                |               |              |               |              |
+| **Allowed address pairs** |                |               |              |               |              |
