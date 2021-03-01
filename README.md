@@ -15,4 +15,5 @@
 * [`Horizon`](https://opendev.org/openstack/puppet-horizon/) - (Dashboard)
 
 
-![Imgur](https://imgur.com/wpuuXzH.png)
+
+<img src="https://imgur.com/wpuuXzH.png" alt="Imgur" style="zoom: 50%;" />
