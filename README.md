@@ -10,7 +10,7 @@
 * [`Keystone`](https://opendev.org/openstack/puppet-keystone/) - (Identity)
 * [`Glance`](https://opendev.org/openstack/puppet-glance/) - (Image Service)
 * [`Heat`](https://opendev.org/openstack/puppet-heat/) - (Orchestration)
-* [`Horizon`](https://opendev.org/openstack/puppet-horizon/) - (Dashboard)<br/>
+* [`Horizon`](https://opendev.org/openstack/puppet-horizon/) - (Dashboard)<br/><br/>
 
 # Client tenant infrastructure
 
@@ -27,9 +27,11 @@ For additional information about instances network configuration:
 | **Availability zone**     |            az2            |                         az2                         |            az2            |            az1            |           az1           |
 | **Allowed address pairs** |            no             |                        yes*                         |            no             |            no             |           no            |
 
-(*) destination: 172.16.2.0/23 172.16.4.0/23, nexthop: 192.168.0.142<br/>(**) ip_address: 0.0.0.0, mac_address: not_defined (by default - its own)<br/>
+(*) destination: 172.16.2.0/23 172.16.4.0/23, nexthop: 192.168.0.142<br/>(**) ip_address: 0.0.0.0, mac_address: not_defined (by default - its own)<br/><br/>
 
-# Simplified RACI<br/>
+# Simplified RACI
+
+#### this diagram helps to define the responsibilities of each party:
 
 |                                                              | *Cloud provider* | *Client* |
 | ------------------------------------------------------------ | :--------------: | :------: |
