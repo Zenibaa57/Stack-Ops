@@ -84,6 +84,7 @@ resources:
       - { subnet: { get_resource: subnet_dmz }, ip_address: 192.168.0.131 }
       security_groups:
       - sg_ssh
+      - sg_icmp
 
   ssh_jumphost_floating_ip:
     type: OS::Neutron::FloatingIP
@@ -121,6 +122,7 @@ resources:
       security_groups:
       - sg_all_from_svc_network
       - sg_all_from_adm_network
+      - sg_icmp
 
   internet_gw_floating_ip:
     type: OS::Neutron::FloatingIP

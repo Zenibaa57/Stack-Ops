@@ -1,0 +1,78 @@
+heat_template_version: 2018-08-31
+
+description: Setting up the ntp protocol
+
+parameters:
+  image:
+    type: string
+    description: The image to use to create the ntp service instance
+    default: customized_ntp_ubuntu
+    constraints:
+    - allowed_values:
+      - customized_ntp_ubuntu
+      - customized_ldap_ubuntu
+
+  availability_zone:
+    type: string
+    description: The availability zone for the ntp service instance
+    default: az1
+    constraints:
+    - allowed_values:
+      - az1
+      - az2
+
+  network_dmz_id:
+    type: string
+    description: The network id of the dmz network (can be found in the outputs of the network deployment stack)
+
+  subnet_dmz_id:
+    type: string
+    description: The subnet id of the dmz subnet (can be found in the outputs of the network deployment stack)
+
+  flavor:
+    type: string
+    description: The flavor to use to create the ntp service instance
+    constraints:
+    - custom_constraint: nova.flavor
+
+  vol_size:
+    type: string
+    description: The size of the volume to assign to the ntp service instance
+    default: "10"
+    constraints:
+    - allowed_pattern: ^[0-9]{2}$
+
+resources:
+  ntp_server_port:
+    type: OS::Neutron::Port
+    properties:
+      name: ntp_server_port
+      network: { get_param: network_dmz_id }
+      fixed_ips:
+      - { subnet: { get_param: subnet_dmz_id }, ip_address: 192.168.0.133 }
+      security_groups:
+      - sg_ntp_service
+      - sg_icmp
+
+  ntp_server_floating_ip:
+    type: OS::Neutron::FloatingIP
+    properties:
+      floating_network: external_network
+      floating_subnet: public_subnet
+
+  ntp_server_ip_association:
+    type: OS::Neutron::FloatingIPAssociation
+    properties:
+      floatingip_id: { get_resource: ntp_server_floating_ip }
+      port_id: { get_resource: ntp_server_port }
+
+  ntp_server:
+    type: OS::Nova::Server
+    properties:
+      name: ntp_server
+      block_device_mapping_v2:
+      - { image: { get_param: image }, volume_size: { get_param: vol_size }, delete_on_termination: true }
+      flavor: { get_param: flavor }
+      availability_zone: { get_param: availability_zone }
+      networks:
+      - port: { get_resource: ntp_server_port }
