@@ -18,12 +18,13 @@
 
 For additional information :
 
-|                           |                        *ssh_jumphost*                        |                        *internet_gw*                         |                         *ntp_server*                         | *ldap_server* | *dns_server* |
-| :------------------------ | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :-----------: | :----------: |
-| **Floating IP**           |                             yes                              |                             yes                              |                             yes                              |      no       |      no      |
-| **Routes**                | dst: 172.16.2.0/23<br />dst: 172.16.4.0/23<br />gw: 192.168.0.142 | dst: 172.16.2.0/23<br />dst: 172.16.4.0/23<br />gw: 192.168.0.142 | dst: 172.16.2.0/23<br />dst: 172.16.4.0/23<br />gw: 192.168.0.142 |      no       |      no      |
-| **DNS servers**           |                                                              |                                                              |                                                              |               |              |
-| **Security group**        |                                                              |                                                              |                                                              |               |              |
-| **Availability zone**     |                                                              |                                                              |                                                              |               |              |
-| **Allowed address pairs** |                                                              |                                                              |                                                              |               |              |
+|                           | *ssh_jumphost* | *internet_gw* | *ntp_server* | *ldap_server* | *dns_server* |
+| :------------------------ | :------------: | :-----------: | :----------: | :-----------: | :----------: |
+| **Floating IP**           |      yes       |      yes      |     yes      |      no       |      no      |
+| **Routes**                |      yes*      |     yes*      |     yes*     |      no       |      no      |
+| **DNS servers**           |                |               |              |               |              |
+| **Security group**        |                |               |              |               |              |
+| **Availability zone**     |                |               |              |               |              |
+| **Allowed address pairs** |                |               |              |               |              |
 
+`(*) destination: 172.16.2.0/23 172.16.4.0/23, nexthop: 192.168.0.142`
