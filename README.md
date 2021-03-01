@@ -4,7 +4,6 @@
 
 #### Module used in this project:
 
-
 * [`Nova`](https://opendev.org/openstack/puppet-nova/) -  (Compute)
 * [`Neutron`](https://opendev.org/openstack/puppet-neutron/) - (Networking)
 * [`Keystone`](https://opendev.org/openstack/puppet-keystone/) - (Identity)
@@ -27,7 +26,7 @@ For additional information about instances network configuration:
 | **Availability zone**     |            az2            |                         az2                         |            az2            |            az1            |           az1           |
 | **Allowed address pairs** |            no             |                        yes*                         |            no             |            no             |           no            |
 
-###### (*) destination: 172.16.2.0/23 172.16.4.0/23, nexthop: 192.168.0.142<br/>(**) ip_address: 0.0.0.0, mac_address: not_defined (by default - its own)<br/><br/>
+###### (*) destination: 172.16.2.0/23, 172.16.4.0/23, nexthop: 192.168.0.142<br/>(**) ip_address: 0.0.0.0, mac_address: not_defined (by default - its own)<br/><br/>
 
 # Simplified RACI
 
