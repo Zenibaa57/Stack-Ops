@@ -22,11 +22,7 @@
 
 
 
-
-
-
-
-
+For additional information :
 
 |                           | *ssh_jumphost* | *internet_gw* | *ntp_server* | *ldap_server* | *dns_server* |
 | :------------------------ | -------------- | ------------- | ------------ | ------------- | ------------ |
