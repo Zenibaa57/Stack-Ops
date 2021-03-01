@@ -242,6 +242,13 @@ outputs:
       - network_dmz
       - show
 
+  services_network_info:
+    description: Detailed information about the services network
+    value:
+      get_attr:
+      - network_services
+      - show
+
   admin_network_info:
     description: Detailed information about the admin network
     value:
