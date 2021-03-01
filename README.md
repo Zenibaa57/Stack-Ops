@@ -29,7 +29,7 @@ For additional information about instances network configuration:
 
 (*) destination: 172.16.2.0/23 172.16.4.0/23, nexthop: 192.168.0.142<br/>(**) ip_address: 0.0.0.0, mac_address: not_defined (by default - its own)<br/>
 
-# Simplified RACI
+# Simplified RACI<br/>
 
 |                                                              | *Cloud provider* | *Client* |
 | ------------------------------------------------------------ | :--------------: | :------: |
