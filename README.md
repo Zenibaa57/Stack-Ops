@@ -39,7 +39,7 @@ For additional information about instances network configuration:
 | **Hosts configuration (networking, time synchronization, disabling SELinux, etc.)** |        x         |          |
 | **Creation of availability zones**                           |        x         |          |
 | **Extension of the cinder storage pool**                     |        x         |          |
-| **Uploading instance images**                                |        x         |          |
+| **Uploading instance images**                                |        x         |    x     |
 | **Creation of the external network**                         |        x         |          |
 | **Creation of predefined flavors***                          |        x         |          |
 | **Creation of the client environment***                      |        x         |          |
