@@ -16,4 +16,4 @@
 
 
 
-<img src="https://imgur.com/wpuuXzH.png" alt="Imgur" style="zoom: 40%;" />
+<img src="https://imgur.com/wpuuXzH.png" alt="Imgur" style="zoom: 33%;" />
