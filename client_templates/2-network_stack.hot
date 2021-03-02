@@ -11,6 +11,7 @@ parameters:
     - allowed_values:
       - bionic-server-cloudimg-amd64
       - focal-server-cloudimg-amd64
+      - ubuntu-18.04_simple
 
   availability_zone:
     type: string

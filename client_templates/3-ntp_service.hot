@@ -10,7 +10,6 @@ parameters:
     constraints:
     - allowed_values:
       - customized_ntp_ubuntu
-      - customized_ldap_ubuntu
 
   availability_zone:
     type: string
