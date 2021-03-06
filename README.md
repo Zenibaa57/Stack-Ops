@@ -59,7 +59,7 @@ The purpose of this user guide is to detail the various actions that can be carr
 
 ## Retrieve admin password and SSH private key
 
-The provider automatically creates the client tenant. The username and password are sent by email to the admin user of the client tenant. Moreover, a key pair is created so that the admin user can create instances and connect to them.
+The provider automatically creates the client tenant. The username and password are then sent to the admin user of the client tenant. Moreover, a key pair is also created so that the admin user can create instances and connect to them.
 
 **The SSH private key (and the password too) can be retrieved under the "Project" tab, then "Orchestration" and click on "admin.prepare_client_env_<client_id>":<br/>**
 <p align="center"><img src="artefacts/retrieve_adm_pwd_and_ssh_priv_key/1.png" width="700" height="715"></p>
@@ -72,11 +72,11 @@ The provider automatically creates the client tenant. The username and password 
 
 1. Download the cloud image from the following link: https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img (the same goes for other Linux distributions)
 2. Use your username and password to log in to your OpenStack tenant
-3. Under the "Project" tab, then "Compute", click on "Images" then "Create an image"
-4. Fill in the fields as follows and click on "Create an image":
+3. Under the "Project" tab, then "Compute", click on "Images" then "Create Image"
+4. Fill in the fields as follows and click on "Create Image":
 <p align="center"><img src="artefacts/upload_an_image/1.png" width="700" height="572"></p>
 
-## Deploy Heat stacks
+## Deploy a stack (Heat)
 
 **The customer can orchestrate the deployment of predefined security groups, the entire network stack, and basic services (NTP, DNS, LDAP) using Heat templates supplied by the provider:**
 
@@ -90,8 +90,8 @@ The provider automatically creates the client tenant. The username and password 
 
 **Here, how to deploy a stack:**
 
-1. Use your admin username and password to log in to your OpenStack tenant
-2. Under the "Project" tab, then "Orchestration", click on "Stacks" then "Launch stack"
+1. Use your username and password to log in to your OpenStack tenant (an account that has the rights to deploy stacks)
+2. Under the "Project" tab, then "Orchestration", click on "Stacks" then "Launch Stack"
 3. Select the template then click on "Next":
 <p align="center"><img src="artefacts/deploy_heat_stacks/1.png" width="700" height="395"></p>
 4. Fill in the fields as follows and click on "Launch":
@@ -99,18 +99,28 @@ The provider automatically creates the client tenant. The username and password 
 5. Verify that the deployment went well:<br/><br/>
 <p align="center"><img src="artefacts/deploy_heat_stacks/3.png" width="700" height="864"></p>
 
+## Destroy a stack (Heat)
+
+**Resources deployed via Heat can also be destroyed (in its entirety):**
+
+1. Use your username and password to log in to your OpenStack tenant (an account that has the rights to destroy stacks)
+2. Under the "Project" tab, then "Orchestration", select the stack to destroy and click on "Delete Stacks"
+
 ## Create an user
 
 1. Use your admin username and password to log in to your OpenStack tenant
-2. Under the "Identity" tab, click on "Users" then "Create an user"
-3. Fill in the fields as follows and click on "Create an user":
+2. Under the "Identity" tab, click on "Users" then "Create user"
+3. Fill in the fields as follows and click on "Create user":
 <p align="center"><img src="artefacts/create_an_user/1.png" width="700" height="876"></p>
+
+*The "Role" field must correspond to the privileges you want to grant to the user.*
 
 ## Create a key pair
 
 1. Use your username and password to log in to your OpenStack tenant
-2. Under the "Compute" tab, click on "Key pairs" then "Create a key pair"
-3. Fill in the fields as follows and click on "Create a key pair":
+2. Under the "Compute" tab, click on "Key Pairs" then "Create Key Pair"
+3. Fill in the fields as follows and click on "Create Key Pair":
 <p align="center"><img src="artefacts/create_a_key_pair/1.png" width="700" height="272"></p>
 
 *The private key will then be downloaded. Keep it in a safe place.*
+
