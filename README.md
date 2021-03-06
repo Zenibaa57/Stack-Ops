@@ -88,5 +88,5 @@ The purpose of this user guide is to detail the various actions that can be carr
    <p align="center"><img src="artefacts/deploy_heat_stacks/1.png"></p><br/>
    <p align="center"><img src="artefacts/deploy_heat_stacks/2.png"></p><br/>
 4. Verify that the deployment went well:
-
+   <p align="center"><img src="artefacts/deploy_heat_stacks/3.png"></p><br/>
    
