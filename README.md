@@ -88,10 +88,10 @@ dazd
 1. Use your username and password to log in to your OpenStack tenant
 2. Under the "Project" tab, then "Orchestration", click on "Stacks" then "Launch Stack"
 3. Select the template then click on "Next":
-<p align="center"><img src="artefacts/deploy_heat_stacks/1.png"></p>
+<p align="center"><img src="artefacts/deploy_heat_stacks/1.png" width="700" height="395"></p>
 4. Fill in the fields as follows and click on "Launch":
-<p align="center"><img src="artefacts/deploy_heat_stacks/2.png"></p>
+<p align="center"><img src="artefacts/deploy_heat_stacks/2.png" width="700" height="723"></p>
 5. Verify that the deployment went well:<br/><br/>
-<p align="center"><img src="artefacts/deploy_heat_stacks/3.png"></p><br/>
+<p align="center"><img src="artefacts/deploy_heat_stacks/3.png" width="700" height="864"></p><br/>
 
 ## Create an user
