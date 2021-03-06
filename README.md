@@ -65,7 +65,7 @@ The purpose of this user guide is to detail the various actions that can be carr
 2. Use your username and password to log in to your OpenStack tenant
 3. Under the "Project" tab, then "Compute", click on "Images" then "Create an image"
 4. Fill in the fields as follows and click on "Create an image":
-   <p align="center"><img src="artefacts/upload_an_image/1.png"></p><br/>
+<p align="center"><img src="artefacts/upload_an_image/1.png"></p><br/>
 
 ## Deploy Heat stacks
 
@@ -84,8 +84,8 @@ The purpose of this user guide is to detail the various actions that can be carr
 1. Use your username and password to log in to your OpenStack tenant
 2. Under the "Project" tab, then "Orchestration", click on "Stacks" then "Launch Stack"
 3. Select the template:
-   <p align="center"><img src="artefacts/deploy_heat_stacks/1.png"></p><br/>
-   <p align="center"><img src="artefacts/deploy_heat_stacks/2.png"></p><br/>
+<p align="center"><img src="artefacts/deploy_heat_stacks/1.png"></p><br/>
+<p align="center"><img src="artefacts/deploy_heat_stacks/2.png"></p><br/>
 4. Verify that the deployment went well:
-   <p align="center"><img src="artefacts/deploy_heat_stacks/3.png"></p><br/>
+<p align="center"><img src="artefacts/deploy_heat_stacks/3.png"></p><br/>
    
