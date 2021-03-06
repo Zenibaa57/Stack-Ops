@@ -6,10 +6,10 @@ parameters:
   image:
     type: string
     description: The image to use to create the ntp server
-    default: custom-cloud-img-ubuntu-bionic
+    default: custom-cloud-img-ubuntu-bionic-v2
     constraints:
     - allowed_values:
-      - custom-cloud-img-ubuntu-bionic
+      - custom-cloud-img-ubuntu-bionic-v2
 
   availability_zone:
     type: string
@@ -82,21 +82,28 @@ resources:
           path: /etc/ntp.conf
           permissions: '0644'
           content: |
-            logfile /var/log/ntpstats/ntpd
+            # Stats
             statsdir /var/log/ntpstats/
             statistics loopstats peerstats clockstats
             filegen loopstats file loopstats type day enable
             filegen peerstats file peerstats type day enable
             filegen clockstats file clockstats type day enable
-            listen on *
-            server 0.fr.pool.ntp.org
-            server 1.fr.pool.ntp.org
-            server 2.fr.pool.ntp.org
-            server 3.fr.pool.ntp.org
-            restrict default kod notrap nomodify nopeer noquery
-            restrict 127.0.0.1 nomodify
+
+            # NTP servers
+            server 0.fr.pool.ntp.org iburst
+            server 1.fr.pool.ntp.org iburst
+            server 2.fr.pool.ntp.org iburst
+            server 3.fr.pool.ntp.org iburst
+            server 127.127.1.0
+            fudge 127.127.1.0 stratum 10
+
+            # Restrict
+            restrict -4 default kod notrap nomodify nopeer noquery limited
+            restrict -6 default kod notrap nomodify nopeer noquery limited
+            restrict localhost nomodify
             restrict 172.16.2.0 mask 255.255.254.0 nomodify notrap
             restrict 172.16.4.0 mask 255.255.254.0 nomodify notrap
+            "{ get_param: key_pair }"
 
   ntp_server:
     type: OS::Nova::Server
