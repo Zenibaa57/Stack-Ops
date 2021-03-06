@@ -15,6 +15,8 @@
 
 <div align="center"><img src="https://imgur.com/wpuuXzH.png" width="700" height="730"></div><br/>
 
+<p align="center"><img src="artefacts/network_diagram.png" alt="" title="" width="700" height="730"/></p><br/>
+
 For additional information about instances network configuration:
 
 |                           |      *ssh_jumphost*       |                    *internet_gw*                    |       *ntp_server*        |       *ldap_server*       |      *dns_server*       |
