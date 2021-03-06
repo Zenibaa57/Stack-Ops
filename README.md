@@ -65,8 +65,36 @@ The purpose of this user guide is to detail the various actions that can be carr
 
 2. Use your username and password to log in to your OpenStack tenant.
 
-3. Under the "Project" tab, then "Compute", click on "Images" and "Create an image".
+3. Under the "Project" tab, then "Compute", click on "Images" then "Create an image".
 
-4. Fill in the fields as follows:
+4. Fill in the fields as follows and click on "Create an image":
 
    <p align="center"><img src="artefacts/upload_an_image/1.png"></p><br/>
+
+## Deploy Heat stacks
+
+#### The customer can orchestrate the deployment of predefined security groups, the entire network stack, and basic services (NTP, DNS, LDAP) using Heat templates supplied by the provider :
+
+1. *security_groups.hot*
+2. *network_stack.hot*
+3. *ntp_service.hot*
+4. *dns_service.hot*
+5. *ldap_service.hot*
+
+<u>The deployment of these configuration files must follow a specific order, as described above.</u>
+
+Here, how to deploy a stack:
+
+1. Use your username and password to log in to your OpenStack tenant.
+
+2. Under the "Project" tab, then "Orchestration", click on "Stacks" then "Launch Stack".
+
+3. Select the template:
+
+   <p align="center"><img src="artefacts/deploy_heat_stacks/1.png"></p><br/>
+
+<p align="center"><img src="artefacts/deploy_heat_stacks/2.png"></p><br/>
+
+4. Verify the deployment of the stack:
+
+   
