@@ -35,7 +35,7 @@ parameters:
 
   network_service_subnet_id:
     type: string
-    description: ID of dns sub network into which servers get deployed
+    description: ID of services subnet into which the server will be deployed
     default: 82266d2f-f027-4eaa-895b-6689e2ebaf83
 
   vol_size:
