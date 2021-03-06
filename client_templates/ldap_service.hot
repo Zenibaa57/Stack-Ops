@@ -1,0 +1,83 @@
+heat_template_version: 2018-08-31
+
+description: >
+  Creation d'un serveur LDAP.
+parameters:
+    key_name:
+        type: string
+        label: Key Name
+        description: SSH key to be used for all instances
+        default: kp
+    servername:
+        type: string
+        label: Instance Name
+        description: 
+        default: ldap-server
+    image_id:
+        type: string
+        label: Image ID
+        description: Image to be used. Check all available options in Horizon dashboard or by using openstack image list command.
+        default: image-ldap-server
+    network_service:
+        type: string
+        description: ID/Name of LDAP network
+        default: net_SERVICES
+    flavor:
+        type: string
+        description: flavor with 1 vCPU, 1 GB Ram and 4 DB of disk
+        default: t2.small
+        constraints:
+        - custom_constraint: nova.flavor
+    network_service_subnet_id:
+        type: string
+        description: ID of dns sub network into which servers get deployed - 10.0.60.0/24
+        default: 82266d2f-f027-4eaa-895b-6689e2ebaf83
+
+    vol_size:
+        type: string
+        description: size du volume
+        default: 12
+    
+    availability_zone:
+      type: string
+      description: The availability zone for the internet_gw and ssh_jumphost instances
+      default: az1
+      constraints:
+      - allowed_values:
+        - az1
+        - az2
+resources:                              
+    server-NTP:                             
+        type: OS::Nova::Server              
+        properties:
+            name: { get_param: servername }                         
+            flavor: { get_param: flavor }
+            availability_zone: { get_param: availability_zone }
+            image: { get_param: image_id }
+            networks:
+                - port: { get_resource: server_ldap_port }
+            key_name: { get_param: key_name }
+            
+
+    server_ldap_port:
+        type: OS::Neutron::Port
+        properties:
+            network: { get_param: network_service }
+            fixed_ips:
+            - { subnet: { get_param: network_service_subnet_id }, ip_address: 172.16.2.150 }
+            security_groups:
+            - sg_icmp
+            - sg_ssh_from_adm_network
+            - sg_ssh
+    my_vol:
+        type: OS::Cinder::Volume
+        properties:
+          size: { get_param: vol_size }
+    vol_att:
+        type: OS::Cinder::VolumeAttachment
+        properties:
+            instance_uuid: { get_resource: server-NTP }
+            volume_id: { get_resource: my_vol }
+            mountpoint: /dev/vdb
+
+		
