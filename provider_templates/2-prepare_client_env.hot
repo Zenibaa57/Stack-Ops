@@ -51,6 +51,13 @@ outputs:
       - random_string
       - value
 
+  admin_user_info:
+    description: Information about the admin user in the client tenant
+    value:
+      get_attr:
+      - admin_user
+      - show
+
   admin_user_private_key:
     description: Private key value of the admin user
     value:
