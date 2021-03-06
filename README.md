@@ -62,8 +62,11 @@ The purpose of this user guide is to detail the various actions that can be carr
 #### This example shows how to upload an Ubuntu cloud image (Ubuntu Server 18.04 LTS - Bionic Beaver).
 
 1. Download the cloud image from the following link https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img (the same goes for other Linux distributions).
+
 2. Use your username and password to log in to your OpenStack tenant.
+
 3. Under the "Project" tab, then "Compute", click on "Images" and "Create an image".
+
 4. Fill in the fields as follows:
 
-![1](C:\Users\zfl\github\Stack-Ops\artefacts\upload_an_image\1.png)
+   <p align="center"><img src="artefacts/upload_an_image/1.png" alt="" title=""/></p><br/>
