@@ -65,7 +65,6 @@ The purpose of this user guide is to detail the various actions that can be carr
 2. Use your username and password to log in to your OpenStack tenant.
 3. Under the "Project" tab, then "Compute", click on "Images" then "Create an image".
 4. Fill in the fields as follows and click on "Create an image":
-   
    <p align="center"><img src="artefacts/upload_an_image/1.png"></p><br/>
 
 ## Deploy Heat stacks
