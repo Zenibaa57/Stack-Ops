@@ -17,14 +17,14 @@
 
 **For additional information about instances network configuration:**
 
-|                           |   *ssh_jumphost*   |                        *internet_gw*                         |    *ntp_server*    |                      *ldap_server*                      |                      *dns_server*                      |
-| :------------------------ | :----------------: | :----------------------------------------------------------: | :----------------: | :-----------------------------------------------------: | :----------------------------------------------------: |
-| **Floating IP**           |        yes         |                             yes                              |        yes         |                           no                            |                           no                           |
-| **Routes**                |        yes°        |                             yes°                             |        yes°        |                           no                            |                           no                           |
-| **DNS servers**           |    172.16.2.149    |                         172.16.2.149                         |    172.16.2.149    |                      172.16.2.149                       |                      172.16.2.149                      |
-| **Security group**        | sg_ssh<br/>sg_icmp | sg_all_from_svc_network<br/>sg_all_from_adm_network<br/>sg_icmp | sg_ntp<br/>sg_icmp | sg_ssh_from_adm_network<br/>sg_ldap_service<br/>sg_icmp | sg_ssh_from_adm_network<br/>sg_dns_service<br/>sg_icmp |
-| **Availability zone**     |        az2         |                             az2                              |        az2         |                           az1                           |                          az1                           |
-| **Allowed address pairs** |         no         |                            yes°°                             |         no         |                           no                            |                           no                           |
+|                           |   *ssh_jumphost*   |                        *internet_gw*                         |        *ntp_server*        |                      *ldap_server*                      |                      *dns_server*                      |
+| :------------------------ | :----------------: | :----------------------------------------------------------: | :------------------------: | :-----------------------------------------------------: | :----------------------------------------------------: |
+| **Floating IP**           |        yes         |                             yes                              |            yes             |                           no                            |                           no                           |
+| **Routes**                |        yes°        |                             yes°                             |            yes°            |                           no                            |                           no                           |
+| **DNS servers**           |    172.16.2.149    |                         172.16.2.149                         |        172.16.2.149        |                      172.16.2.149                       |                      172.16.2.149                      |
+| **Security group**        | sg_ssh<br/>sg_icmp | sg_all_from_svc_network<br/>sg_all_from_adm_network<br/>sg_icmp | sg_ntp_service<br/>sg_icmp | sg_ssh_from_adm_network<br/>sg_ldap_service<br/>sg_icmp | sg_ssh_from_adm_network<br/>sg_dns_service<br/>sg_icmp |
+| **Availability zone**     |        az2         |                             az2                              |            az2             |                           az1                           |                          az1                           |
+| **Allowed address pairs** |         no         |                            yes°°                             |             no             |                           no                            |                           no                           |
 
 ###### (°) destination: 172.16.2.0/23, 172.16.4.0/23, nexthop: 192.168.0.142<br/>(°°) ip_address: 0.0.0.0, mac_address: not_defined (by default - its own)<br/><br/>
 
