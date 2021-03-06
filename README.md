@@ -13,7 +13,7 @@
 
 # Client tenant infrastructure
 
-<p align="center"><img src="artefacts/network_diagram.png" alt="" title="" width="700" height="730"/></p><br/>
+<p align="center"><img src="artefacts/network_diagram.png" width="700" height="730"></p><br/>
 
 For additional information about instances network configuration:
 
@@ -55,7 +55,7 @@ For additional information about instances network configuration:
 
 # User guide
 
-The purpose of this user guide is to detail the various actions that can be carried out by the customer as part of the management of its infrastructure (see simplified RACI).<br/><br/>
+The purpose of this user guide is to detail the various actions that can be carried out by the customer as part of the management of its infrastructure (see simplified RACI).
 
 ## Upload an image
 
@@ -69,4 +69,4 @@ The purpose of this user guide is to detail the various actions that can be carr
 
 4. Fill in the fields as follows:
 
-   <p align="center"><img src="artefacts/upload_an_image/1.png" alt="" title=""/></p><br/>
+   <p align="center"><img src="artefacts/upload_an_image/1.png"></p><br/>
