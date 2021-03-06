@@ -1,7 +1,7 @@
 heat_template_version: 2018-08-31
 
 description: >
-  Creation d'un serveur LDAP.
+  Creation d'un serveur DNS.
 parameters:
     key_name:
         type: string
@@ -11,17 +11,17 @@ parameters:
     servername:
         type: string
         label: Instance Name
-        description: 
-        default: ldap-server
+        description:
+        default: dns-server
     image_id:
         type: string
         label: Image ID
         description: Image to be used. Check all available options in Horizon dashboard or by using openstack image list command.
-        default: image-ldap-server
+        default: dns-server-v3
     network_service:
         type: string
         description: ID/Name of LDAP network
-        default: net_SERVICES
+        default: network_services
     flavor:
         type: string
         description: flavor with 1 vCPU, 1 GB Ram and 4 DB of disk
@@ -37,7 +37,7 @@ parameters:
         type: string
         description: size du volume
         default: 12
-    
+
     availability_zone:
       type: string
       description: The availability zone for the internet_gw and ssh_jumphost instances
@@ -46,20 +46,20 @@ parameters:
       - allowed_values:
         - az1
         - az2
-resources:                              
-    server-NTP:                             
-        type: OS::Nova::Server              
+resources:
+    server-DNS:
+        type: OS::Nova::Server
         properties:
-            name: { get_param: servername }                         
+            name: { get_param: servername }
             flavor: { get_param: flavor }
             availability_zone: { get_param: availability_zone }
             image: { get_param: image_id }
             networks:
-                - port: { get_resource: server_ldap_port }
+                - port: { get_resource: server_dns_port }
             key_name: { get_param: key_name }
-            
 
-    server_ldap_port:
+
+    server_dns_port:
         type: OS::Neutron::Port
         properties:
             network: { get_param: network_service }
@@ -67,8 +67,8 @@ resources:
             - { subnet: { get_param: network_service_subnet_id }, ip_address: 172.16.2.150 }
             security_groups:
             - sg_icmp
+            - sg_dns_service
             - sg_ssh_from_adm_network
-            - sg_ssh
     my_vol:
         type: OS::Cinder::Volume
         properties:
@@ -76,8 +76,6 @@ resources:
     vol_att:
         type: OS::Cinder::VolumeAttachment
         properties:
-            instance_uuid: { get_resource: server-NTP }
+            instance_uuid: { get_resource: server-DNS }
             volume_id: { get_resource: my_vol }
             mountpoint: /dev/vdb
-
-		

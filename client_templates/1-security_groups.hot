@@ -3,14 +3,6 @@ heat_template_version: 2018-08-31
 description: Creation of predefined security groups
 
 resources:
-  sg_ntp:
-    type: OS::Neutron::SecurityGroup
-    properties:
-      name: sg_ntp
-      description: Allow remote connections via the NTP protocol
-      rules:
-      - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: udp, port_range_min: 123, port_range_max: 123 }
-
   sg_ssh:
     type: OS::Neutron::SecurityGroup
     properties:
@@ -36,6 +28,14 @@ resources:
       - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: tcp, port_range_min: 80, port_range_max: 80 }
       - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: tcp, port_range_min: 443, port_range_max: 443 }
 
+  sg_ntp_service:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: sg_ntp_service
+      description: Allow remote connections via the NTP protocol
+      rules:
+      - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: udp, port_range_min: 123, port_range_max: 123 }
+
   sg_dns_service:
     type: OS::Neutron::SecurityGroup
     properties:
@@ -44,6 +44,15 @@ resources:
       rules:
       - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: tcp, port_range_min: 53, port_range_max: 53 }
       - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: udp, port_range_min: 53, port_range_max: 53 }
+
+  sg_ldap_service:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: sg_ldap_service
+      description: Allow remote connections via the LDAP protocol
+      rules:
+      - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: tcp, port_range_min: 389, port_range_max: 389 }
+      - { remote_ip_prefix: 0.0.0.0/0, direction: ingress, protocol: udp, port_range_min: 389, port_range_max: 389 }
 
   sg_icmp:
     type: OS::Neutron::SecurityGroup

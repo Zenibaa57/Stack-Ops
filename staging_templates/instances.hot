@@ -7,14 +7,25 @@ parameters:
     type: string
     label: Key Name
     description: Name of key-pair to be used for compute instance
+
   image_id:
     type: string
     label: Image ID
     description: Image to be used for compute instance
+
   instance_type:
     type: string
     label: Instance Type
     description: Type of instance (flavor) to be used
+
+  vol_size:
+    type: string
+    description: size du volume
+    default: 5
+    availability_zone:
+      type: string
+      description: the availability zone to launch the instance.
+      default: az1
 
 resources:
   my_instance:
@@ -23,3 +34,24 @@ resources:
       key_name: { get_param: key_name }
       image: { get_param: image_id }
       flavor: { get_param: instance_type }
+  ntp_server:
+    type: OS::Nova::Server
+    properties:
+      name: { get_param: servername }
+      flavor: { get_param: flavor }
+      image: { get_param: image_id }
+      networks:
+      - port: { get_resource: server_ntp_port }
+      key_name: { get_param: key_name }
+      availability_zone: { get_param: availability_zone }
+    my_vol:
+        type: OS::Cinder::Volume
+        properties:
+          size: { get_param: vol_size }
+          availability_zone: { get_param: availability_zone }
+    vol_att:
+        type: OS::Cinder::VolumeAttachment
+        properties:
+            instance_uuid: { get_resource: server-NTP }
+            volume_id: { get_resource: my_vol }
+            mountpoint: /dev/vdb

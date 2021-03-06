@@ -11,6 +11,7 @@ parameters:
     - allowed_values:
       - bionic-server-cloudimg-amd64
       - focal-server-cloudimg-amd64
+      - ubuntu-18.04_simple
 
   availability_zone:
     type: string
@@ -70,7 +71,7 @@ resources:
       - { nexthop: 192.168.0.142, destination: 172.16.2.0/23 }
       - { nexthop: 192.168.0.142, destination: 172.16.4.0/23 }
       dns_nameservers:
-      # - 172.16.2.x (ip du serveur dns interne)
+      - 172.16.2.149
       - 8.8.8.8
       - 8.8.4.4
       ip_version: 4
@@ -84,6 +85,7 @@ resources:
       - { subnet: { get_resource: subnet_dmz }, ip_address: 192.168.0.131 }
       security_groups:
       - sg_ssh
+      - sg_icmp
 
   ssh_jumphost_floating_ip:
     type: OS::Neutron::FloatingIP
@@ -121,6 +123,7 @@ resources:
       security_groups:
       - sg_all_from_svc_network
       - sg_all_from_adm_network
+      - sg_icmp
 
   internet_gw_floating_ip:
     type: OS::Neutron::FloatingIP
@@ -210,7 +213,7 @@ resources:
       cidr: 172.16.2.0/23
       gateway_ip: 172.16.2.1
       dns_nameservers:
-      # - 172.16.2.x (ip du serveur dns interne)
+      - 172.16.2.149
       - 8.8.8.8
       - 8.8.4.4
       ip_version: 4
@@ -229,7 +232,29 @@ resources:
       cidr: 172.16.4.0/23
       gateway_ip: 172.16.4.1
       dns_nameservers:
-      # - 172.16.2.x (ip du serveur dns interne)
+      - 172.16.2.149
       - 8.8.8.8
       - 8.8.4.4
       ip_version: 4
+
+outputs:
+  dmz_network_info:
+    description: Detailed information about the DMZ network
+    value:
+      get_attr:
+      - network_dmz
+      - show
+
+  services_network_info:
+    description: Detailed information about the services network
+    value:
+      get_attr:
+      - network_services
+      - show
+
+  admin_network_info:
+    description: Detailed information about the admin network
+    value:
+      get_attr:
+      - network_admin
+      - show

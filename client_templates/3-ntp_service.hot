@@ -1,0 +1,113 @@
+heat_template_version: 2018-08-31
+
+description: Setting up the ntp protocol
+
+parameters:
+  image:
+    type: string
+    description: The image to use to create the ntp server
+    default: custom-cloud-img-ubuntu-bionic
+    constraints:
+    - allowed_values:
+      - custom-cloud-img-ubuntu-bionic
+
+  availability_zone:
+    type: string
+    description: The availability zone for the ntp server
+    default: az1
+    constraints:
+    - allowed_values:
+      - az1
+      - az2
+
+  key_pair:
+    type: string
+    description: The key pair to use for the ntp server
+    constraints:
+    - custom_constraint: nova.keypair
+
+  network_dmz_id:
+    type: string
+    description: The network id of the dmz network (can be found in the outputs of the network deployment stack)
+
+  subnet_dmz_id:
+    type: string
+    description: The subnet id of the dmz subnet (can be found in the outputs of the network deployment stack)
+
+  flavor:
+    type: string
+    description: The flavor to use to create the ntp server
+    constraints:
+    - custom_constraint: nova.flavor
+
+  vol_size:
+    type: string
+    description: The size of the volume to assign to the ntp server
+    default: "10"
+    constraints:
+    - allowed_pattern: ^[0-9]{2}$
+
+resources:
+  ntp_server_port:
+    type: OS::Neutron::Port
+    properties:
+      name: ntp_server_port
+      network: { get_param: network_dmz_id }
+      fixed_ips:
+      - { subnet: { get_param: subnet_dmz_id }, ip_address: 192.168.0.133 }
+      security_groups:
+      - sg_ntp_service
+      - sg_icmp
+
+  ntp_server_floating_ip:
+    type: OS::Neutron::FloatingIP
+    properties:
+      floating_network: external_network
+      floating_subnet: public_subnet
+
+  ntp_server_ip_association:
+    type: OS::Neutron::FloatingIPAssociation
+    properties:
+      floatingip_id: { get_resource: ntp_server_floating_ip }
+      port_id: { get_resource: ntp_server_port }
+
+  ntp_server_boot_config:
+    type: OS::Heat::CloudConfig
+    properties:
+      cloud_config:
+        runcmd:
+        - service ntp restart
+        write_files:
+        - owner: root:root
+          path: /etc/ntp.conf
+          permissions: '0644'
+          content: |
+            logfile /var/log/ntpstats/ntpd
+            statsdir /var/log/ntpstats/
+            statistics loopstats peerstats clockstats
+            filegen loopstats file loopstats type day enable
+            filegen peerstats file peerstats type day enable
+            filegen clockstats file clockstats type day enable
+            listen on *
+            server 0.fr.pool.ntp.org
+            server 1.fr.pool.ntp.org
+            server 2.fr.pool.ntp.org
+            server 3.fr.pool.ntp.org
+            restrict default kod notrap nomodify nopeer noquery
+            restrict 127.0.0.1 nomodify
+            restrict 172.16.2.0 mask 255.255.254.0 nomodify notrap
+            restrict 172.16.4.0 mask 255.255.254.0 nomodify notrap
+
+  ntp_server:
+    type: OS::Nova::Server
+    properties:
+      name: ntp_server
+      key_name: { get_param: key_pair }
+      block_device_mapping_v2:
+      - { image: { get_param: image }, volume_size: { get_param: vol_size }, delete_on_termination: true }
+      flavor: { get_param: flavor }
+      availability_zone: { get_param: availability_zone }
+      networks:
+      - port: { get_resource: ntp_server_port }
+      user_data_format: SOFTWARE_CONFIG
+      user_data: { get_resource: ntp_server_boot_config }
