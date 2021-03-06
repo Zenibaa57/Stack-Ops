@@ -99,6 +99,16 @@ The provider automatically creates the client tenant. The username and password 
 5. Verify that the deployment went well:<br/><br/>
 <p align="center"><img src="artefacts/deploy_heat_stacks/3.png" width="700" height="864"></p>
 
+**For the deployment of the NTP, DNS and LDAP services, the id of the target network and subnet must be extracted.**
+
+For example, to deploy the NTP stack, we need the id of the DMZ network and subnet:
+<p align="center"><img src="artefacts/deploy_heat_stacks/4.png" width="700" height="860"></p>
+
+To retrieve those information, we go back to the network stack deployment, under the "Overview" tab, then "Outputs":
+<p align="center"><img src="artefacts/deploy_heat_stacks/5.png" width="700" height="732"></p>
+
+*For the DNS and LDAP stacks, the id of the services network and subnet are needed.*
+
 ## Destroy a stack (Heat)
 
 **Resources deployed via Heat can also be destroyed (in its entirety):**
