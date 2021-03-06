@@ -59,7 +59,7 @@ The purpose of this user guide is to detail the various actions that can be carr
 
 ## Retrieve admin password and SSH private key
 
-The provider automatically creates the client tenant. The username and password are sent by email to the admin user of the client tenant. Moreover, a key pair is created so that the admin user can create instances and connect to them. The SSH private key (and the password too) can be retrieved under the "Project" tab, then "Orchestration" and click on "admin.prepare_client_env_<client_id>":<br/><br/>
+The provider automatically creates the client tenant. The username and password are sent by email to the admin user of the client tenant. Moreover, a key pair is created so that the admin user can create instances and connect to them. The SSH private key (and the password too) can be retrieved under the "Project" tab, then "Orchestration" and click on "admin.prepare_client_env_<client_id>":<br/>
 <p align="center"><img src="artefacts/retrieve_adm_pwd_and_ssh_priv_key/1.png" width="700" height="715"></p><br/>
 
 *The admin user is of course free to delete this key pair and create a new one. The creation of key pairs will be presented later in this user guide.*
@@ -88,8 +88,8 @@ The provider automatically creates the client tenant. The username and password 
 
 **Here, how to deploy a stack:**
 
-1. Use your username and password to log in to your OpenStack tenant
-2. Under the "Project" tab, then "Orchestration", click on "Stacks" then "Launch Stack"
+1. Use your admin username and password to log in to your OpenStack tenant
+2. Under the "Project" tab, then "Orchestration", click on "Stacks" then "Launch stack"
 3. Select the template then click on "Next":
 <p align="center"><img src="artefacts/deploy_heat_stacks/1.png" width="700" height="395"></p>
 4. Fill in the fields as follows and click on "Launch":
@@ -98,3 +98,13 @@ The provider automatically creates the client tenant. The username and password 
 <p align="center"><img src="artefacts/deploy_heat_stacks/3.png" width="700" height="864"></p>
 
 ## Create an user
+
+1. Use your admin username and password to log in to your OpenStack tenant
+2. Under the "Identity" tab, click on "Users" then "Create an user"
+3. Fill in the fields as follows and click on "Create an user":
+<p align="center"><img src="artefacts/create_an_user/1.png" width="700" height="876"></p>
+
+## Create a key pair
+
+1. Use your username and password to log in to your OpenStack tenant
+2. Under the "Compute" tab, click on "Users" then "Create an user"
