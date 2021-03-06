@@ -2,7 +2,7 @@
 
 # OpenStack
 
-#### Module used in this project:
+**Module used in this project:**
 
 * [`Nova`](https://opendev.org/openstack/puppet-nova/) -  (Compute)
 * [`Neutron`](https://opendev.org/openstack/puppet-neutron/) - (Networking)
@@ -15,7 +15,7 @@
 
 <p align="center"><img src="artefacts/network_diagram.png" width="700" height="730"></p><br/>
 
-For additional information about instances network configuration:
+**For additional information about instances network configuration:**
 
 |                           | *ssh_jumphost* |                    *internet_gw*                    | *ntp_server* |      *ldap_server*      |      *dns_server*       |
 | :------------------------ | :------------: | :-------------------------------------------------: | :----------: | :---------------------: | :---------------------: |
@@ -30,7 +30,7 @@ For additional information about instances network configuration:
 
 # Simplified RACI
 
-#### This diagram helps to define the responsibilities of each party:
+**This diagram helps to define the responsibilities of each party:**
 
 |                                                              | *Cloud provider* | *Client* |
 | ------------------------------------------------------------ | :--------------: | :------: |
@@ -59,17 +59,18 @@ The purpose of this user guide is to detail the various actions that can be carr
 
 ## Upload an image
 
-#### This example shows how to upload an Ubuntu cloud image (Ubuntu Server 18.04 LTS - Bionic Beaver).
+**This example shows how to upload an Ubuntu cloud image (Ubuntu Server 18.04 LTS - Bionic Beaver):**
 
 1. Download the cloud image from the following link https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img (the same goes for other Linux distributions)
 2. Use your username and password to log in to your OpenStack tenant
 3. Under the "Project" tab, then "Compute", click on "Images" then "Create an image"
 4. Fill in the fields as follows and click on "Create an image":
+   
    <p align="center"><img src="artefacts/upload_an_image/1.png"></p><br/>
 
 ## Deploy Heat stacks
 
-#### The customer can orchestrate the deployment of predefined security groups, the entire network stack, and basic services (NTP, DNS, LDAP) using Heat templates supplied by the provider :
+**The customer can orchestrate the deployment of predefined security groups, the entire network stack, and basic services (NTP, DNS, LDAP) using Heat templates supplied by the provider:**
 
 1. security_groups.hot
 2. network_stack.hot
@@ -77,9 +78,9 @@ The purpose of this user guide is to detail the various actions that can be carr
 4. dns_service.hot
 5. ldap_service.hot
 
-**The deployment of these configuration files must follow a specific order, as described above.**
+*The deployment of these configuration files must follow a specific order, as described above.*
 
-Here, how to deploy a stack:
+**Here, how to deploy a stack:**
 
 1. Use your username and password to log in to your OpenStack tenant
 2. Under the "Project" tab, then "Orchestration", click on "Stacks" then "Launch Stack"
