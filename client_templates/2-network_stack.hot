@@ -72,8 +72,6 @@ resources:
       - { nexthop: 192.168.0.142, destination: 172.16.4.0/23 }
       dns_nameservers:
       - 172.16.2.149
-      - 8.8.8.8
-      - 8.8.4.4
       ip_version: 4
 
   ssh_jumphost_port:
@@ -214,8 +212,6 @@ resources:
       gateway_ip: 172.16.2.1
       dns_nameservers:
       - 172.16.2.149
-      - 8.8.8.8
-      - 8.8.4.4
       ip_version: 4
 
   ### network_admin ###
@@ -233,8 +229,6 @@ resources:
       gateway_ip: 172.16.4.1
       dns_nameservers:
       - 172.16.2.149
-      - 8.8.8.8
-      - 8.8.4.4
       ip_version: 4
 
 outputs:

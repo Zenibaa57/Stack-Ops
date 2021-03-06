@@ -1,6 +1,6 @@
 heat_template_version: 2018-08-31
 
-description: Setting up the ntp protocol
+description: Setting up the ntp server
 
 parameters:
   image:
@@ -103,7 +103,6 @@ resources:
             restrict localhost nomodify
             restrict 172.16.2.0 mask 255.255.254.0 nomodify notrap
             restrict 172.16.4.0 mask 255.255.254.0 nomodify notrap
-            "{ get_param: key_pair }"
 
   ntp_server:
     type: OS::Nova::Server
