@@ -13,8 +13,6 @@
 
 # Client tenant infrastructure
 
-<div align="center"><img src="https://imgur.com/wpuuXzH.png" width="700" height="730"></div><br/>
-
 <p align="center"><img src="artefacts/network_diagram.png" alt="" title="" width="700" height="730"/></p><br/>
 
 For additional information about instances network configuration:
@@ -53,4 +51,6 @@ For additional information about instances network configuration:
 | **Addition of new security groups in the client project**    |                  |    x     |
 | **Addition of new services in the client project**           |                  |    x     |
 
-###### (*) Can be automated via Heat (OpenStack orchestration)
+###### (*) Can be automated via Heat (OpenStack orchestration)<br/><br/>
+
+# User guide
