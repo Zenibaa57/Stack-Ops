@@ -57,6 +57,10 @@
 
 The purpose of this user guide is to detail the various actions that can be carried out by the customer as part of the management of its infrastructure (see simplified RACI).
 
+## Retrieve admin password and SSH private key
+
+dazd
+
 ## Upload an image
 
 **This example shows how to upload an Ubuntu cloud image (Ubuntu Server 18.04 LTS - Bionic Beaver):**
@@ -65,7 +69,7 @@ The purpose of this user guide is to detail the various actions that can be carr
 2. Use your username and password to log in to your OpenStack tenant
 3. Under the "Project" tab, then "Compute", click on "Images" then "Create an image"
 4. Fill in the fields as follows and click on "Create an image":
-<p align="center"><img src="artefacts/upload_an_image/1.png"></p><br/>
+<p align="center"><img src="artefacts/upload_an_image/1.png" width="700" height="572"></p><br/>
 
 ## Deploy Heat stacks
 
@@ -88,4 +92,6 @@ The purpose of this user guide is to detail the various actions that can be carr
 4. Fill in the fields as follows and click on "Launch":
 <p align="center"><img src="artefacts/deploy_heat_stacks/2.png"></p>
 5. Verify that the deployment went well:<br/><br/>
-<p align="center"><img src="artefacts/deploy_heat_stacks/3.png"></p>
+<p align="center"><img src="artefacts/deploy_heat_stacks/3.png"></p><br/>
+
+## Create an user
