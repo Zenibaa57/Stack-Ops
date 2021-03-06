@@ -59,7 +59,8 @@ The purpose of this user guide is to detail the various actions that can be carr
 
 ## Retrieve admin password and SSH private key
 
-dazd
+The provider automatically creates the client tenant. The username and password are sent by email to the admin user of the client tenant. Moreover, a key pair is created so that the admin user can create instances. The SSH private key can be retrieved under the "Project" tab, then "Orchestration" and click on "admin.prepare_client_env_<client_id>":<br/><br/>
+<p align="center"><img src="artefacts/retrieve_adm_pwd_and_ssh_priv_key/1.png" width="700" height="715"></p><br/>
 
 ## Upload an image
 
