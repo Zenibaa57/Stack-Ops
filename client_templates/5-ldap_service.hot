@@ -73,7 +73,7 @@ resources:
       security_groups:
       - sg_icmp
       - sg_ssh_from_adm_network
-      - sg_ssh
+      - sg_ldap_service
 
   my_vol:
     type: OS::Cinder::Volume
