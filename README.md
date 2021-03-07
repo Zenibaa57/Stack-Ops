@@ -194,7 +194,9 @@ For example, let's say you want to create rules that allow RDP traffic (ingress)
 
 ## Create an instance
 
-**With all the elements previously created, we will see how to create an RDP server. Let's assume that the xrdp package is included in the cloud image that we are going to use.**
+**With all the elements previously created, we will see how to create an RDP server.**
+
+Let's assume that the **xrdp** package is included in the cloud image that we are going to use:
 
 1. Use your username and password to log in to your OpenStack tenant
 2. Under the "Project" tab, then "Compute", click on "Instances" then "Launch Instance"
