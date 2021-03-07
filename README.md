@@ -70,10 +70,8 @@ The provider automatically creates the client tenant. The username and password 
 
 **This example shows how to upload an Ubuntu cloud image (Ubuntu Server 18.04 LTS - Bionic Beaver):**
 
-1 - Download the cloud image from the following link: https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img (the same goes for other Linux distributions)
-2 - Use your username and password to log in to your OpenStack tenant
-3 - Under the "Project" tab, then "Compute", click on "Images" then "Create Image"
-4 - Fill in the fields as follows and click on "Create Image":
+1 - Download the cloud image from the following link: https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img (the same goes for other Linux distributions)<br/>2 - Use your username and password to log in to your OpenStack tenant<br/>3 - Under the "Project" tab, then "Compute", click on "Images" then "Create Image"<br/>4 - Fill in the fields as follows and click on "Create Image":
+
 <p align="center"><img src="artefacts/upload_an_image/1.png" width="700" height="572"></p>
 
 ## Deploy a stack (Heat)
