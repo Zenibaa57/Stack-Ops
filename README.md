@@ -115,8 +115,8 @@ To retrieve those information, we go back to the network stack deployment, under
 
 **Resources deployed via Heat can also be destroyed (in its entirety):**
 
-1 - Use your username and password to log in to your OpenStack tenant (an account that has the rights to destroy stacks)
-2 - Under the "Project" tab, then "Orchestration", select the stack to destroy and click on "Delete Stacks"
+1. Use your username and password to log in to your OpenStack tenant (an account that has the rights to destroy stacks)
+2. Under the "Project" tab, then "Orchestration", select the stack to destroy and click on "Delete Stacks"
 
 ## Create a user
 
@@ -124,9 +124,9 @@ To retrieve those information, we go back to the network stack deployment, under
 
 Here, an example concerning the addition of a new member in the client project:
 
-1 - Use your admin username and password to log in to your OpenStack tenant
-2 - Under the "Identity" tab, click on "Users" then "Create user"
-3 - Fill in the fields as follows and click on "Create user":
+1. Use your admin username and password to log in to your OpenStack tenant
+2. Under the "Identity" tab, click on "Users" then "Create user"
+3. Fill in the fields as follows and click on "Create user":
 <p align="center"><img src="artefacts/create_an_user/1.png" width="700" height="876"></p>
 
 *The "Role" field must correspond to the privileges you want to grant to the user.*
@@ -135,9 +135,9 @@ Here, an example concerning the addition of a new member in the client project:
 
 **To allow new users to create instances and then connect to them, new key pairs must be created:**
 
-1 - Use your username and password to log in to your OpenStack tenant
-2 - Under the "Project" tab, then "Compute", click on "Key Pairs" then "Create Key Pair"
-3 - Fill in the fields as follows and click on "Create Key Pair":
+1. Use your username and password to log in to your OpenStack tenant
+2. Under the "Project" tab, then "Compute", click on "Key Pairs" then "Create Key Pair"
+3. Fill in the fields as follows and click on "Create Key Pair":
 <p align="center"><img src="artefacts/create_a_key_pair/1.png" width="700" height="272"></p>
 
 *The private key will then be downloaded. Keep it in a safe place.*
@@ -148,23 +148,27 @@ Here, an example concerning the addition of a new member in the client project:
 
 ### Create a network and a subnet
 
-1 - Use your username and password to log in to your OpenStack tenant
-2 - Under the "Project" tab, then "Network", click on "Networks" then "Create Network"
-3 - Indicate the name of the network and click on "Next":
+1. Use your username and password to log in to your OpenStack tenant
+2. Under the "Project" tab, then "Network", click on "Networks" then "Create Network"
+3. Indicate the name of the network and click on "Next":
 <p align="center"><img src="artefacts/create_network_components/1.png" width="700" height="439"></p>
-4 - Indicate the name of the subnet, its CIDR and click on "Next" (by default, the gateway is the first IP address of the subnet):
+
+4. Indicate the name of the subnet, its CIDR and click on "Next" (by default, the gateway is the first IP address of the subnet):
 <p align="center"><img src="artefacts/create_network_components/2.png" width="700" height="498"></p>
-5 - Now, it is possible define the DHCP allocation pool (left by default in the example below), DNS servers and routes:
+
+5. Now, it is possible define the DHCP allocation pool (left by default in the example below), DNS servers and routes:
 <p align="center"><img src="artefacts/create_network_components/3.png" width="700" height="586"></p>
 
 ### Create a router
 
-1 - Still in the "Network" section, click on "Routers" then "Create Router":
-2 - Indicate the name of the router and whether or not you want your router to be attached to the external network:
+1. Still in the "Network" section, click on "Routers" then "Create Router":
+2. Indicate the name of the router and whether or not you want your router to be attached to the external network:
 <p align="center"><img src="artefacts/create_network_components/4.png" width="700" height="426"></p>
-3 - Now that the router is created, you might want to attach it to the network created previously; to do so, select the newly created router:<br/><br/>
+
+3. Now that the router is created, you might want to attach it to the network created previously; to do so, select the newly created router:<br/><br/>
 <p align="center"><img src="artefacts/create_network_components/5.png" width="700" height="254"></p>
-4 - Click on the "Interfaces" tab then "Add Interface", and select the right subnet (if no IP address is specified here, the IP address of the subnet gateway will be used for the new interface created in the router):
+
+4. Click on the "Interfaces" tab then "Add Interface", and select the right subnet (if no IP address is specified here, the IP address of the subnet gateway will be used for the new interface created in the router):
 <p align="center"><img src="artefacts/create_network_components/6.png" width="700" height="351"></p>
 
 *Note that it is also possible to attach your network to an existing router (the principle is the same as previously described).*
