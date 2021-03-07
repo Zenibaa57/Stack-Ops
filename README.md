@@ -116,7 +116,7 @@ To retrieve those information, we go back to the network stack deployment, under
 1. Use your username and password to log in to your OpenStack tenant (an account that has the rights to destroy stacks)
 2. Under the "Project" tab, then "Orchestration", select the stack to destroy and click on "Delete Stacks"
 
-## Create an user
+## Create a user
 
 1. Use your admin username and password to log in to your OpenStack tenant
 2. Under the "Identity" tab, click on "Users" then "Create user"
