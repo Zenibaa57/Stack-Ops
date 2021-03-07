@@ -82,14 +82,14 @@ resources:
           path: /etc/ntp.conf
           permissions: '0644'
           content: |
-            # Stats
+            driftfile /var/lib/ntp/ntp.drift
+            leapfile /usr/share/zoneinfo/leap-seconds.list
             statsdir /var/log/ntpstats/
             statistics loopstats peerstats clockstats
             filegen loopstats file loopstats type day enable
             filegen peerstats file peerstats type day enable
             filegen clockstats file clockstats type day enable
 
-            # NTP servers
             server 0.fr.pool.ntp.org iburst
             server 1.fr.pool.ntp.org iburst
             server 2.fr.pool.ntp.org iburst
@@ -97,12 +97,18 @@ resources:
             server 127.127.1.0
             fudge 127.127.1.0 stratum 10
 
-            # Restrict
             restrict -4 default kod notrap nomodify nopeer noquery limited
             restrict -6 default kod notrap nomodify nopeer noquery limited
             restrict localhost nomodify
             restrict 172.16.2.0 mask 255.255.254.0 nomodify notrap
             restrict 172.16.4.0 mask 255.255.254.0 nomodify notrap
+            broadcast 172.16.3.255
+            broadcast 172.16.5.255
+
+            #### Client conf
+            ### server 192.168.0.133
+            ## ntpq -p
+            # That's all
 
   ntp_server:
     type: OS::Nova::Server
