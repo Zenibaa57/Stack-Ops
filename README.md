@@ -157,6 +157,17 @@ Here, an example concerning the addition of a new member in the client project:
 
 ### Create a router
 
+1. Still in the "Network" section, click on "Routers" then "Create Router":
+2. Indicate the name of the router and whether or not you want your router to be attached to the external network:
+<p align="center"><img src="artefacts/create_network_components/4.png" width="700" height="426"></p>
+3. Now that the router is created, you might want to attach it to the network created previously; to do so, select the newly created router:
+<p align="center"><img src="artefacts/create_network_components/5.png" width="700" height="254"></p>
+4. Click on the "Interfaces" tab then "Add Interface", and select the right subnet (if no IP address is specified here, the IP address of the subnet gateway will be used for the new interface created in the router):
+<p align="center"><img src="artefacts/create_network_components/6.png" width="700" height="351"></p>
 
+*Note that it is also possible to attach your network to an existing router (the principle is the same as previously described).*
+
+For example, you can attach your network the router "router_in_the_middle" if you used the provided Heat stack:
+<p align="center"><img src="artefacts/create_network_components/7.png" width="700" height="323"></p>
 
 ### Create a security group
