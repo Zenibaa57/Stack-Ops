@@ -86,7 +86,7 @@ The provider automatically creates the client tenant. The username and password 
 4. dns_service.hot
 5. ldap_service.hot
 
-*The deployment of these configuration files must follow a specific order, as described above.*
+*The deployment of these configuration files must follow a specific order, as described above with the number related to the Heat Orchestration Template (HOT) file.*
 
 **Here, how to deploy a stack:**
 
