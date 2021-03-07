@@ -156,7 +156,7 @@ Here, an example concerning the addition of a new member in the client project:
 4. Indicate the name of the subnet, its CIDR and click on "Next" (by default, the gateway is the first IP address of the subnet):
 <p align="center"><img src="artefacts/create_network_components/2.png" width="700" height="498"></p>
 
-5. Now, it is possible define the DHCP allocation pool (left by default in the example below), DNS servers and routes:
+5. Now, it is possible to define the DHCP allocation pool (left by default in the example below), DNS servers and routes:
 <p align="center"><img src="artefacts/create_network_components/3.png" width="700" height="586"></p>
 
 ### Create a router
@@ -177,3 +177,19 @@ For example, you can attach your network the router "router_in_the_middle" if yo
 <p align="center"><img src="artefacts/create_network_components/7.png" width="700" height="323"></p>
 
 ### Create a security group
+
+**Security groups provides segmentation within a network as well as full control over traffic that ingresses or egresses an instance in a network.**
+
+For example, let's say you want to create rules that allow RDP traffic (ingress):
+
+1. Still in the "Network" section, click on "Security Groups" then "Create Security Group"
+2. Indicate the name of the security group then click on "Create Security Group":
+<p align="center"><img src="artefacts/create_network_components/8.png" width="700" height="333"></p>
+
+3. Click on "Add Rule" and fill in the fields as follows and click on "Add":
+<p align="center"><img src="artefacts/create_network_components/9.png" width="700" height="639"></p>
+
+4. Re-click on "Add Rule" and fill in the fields as follows and click on "Add":
+<p align="center"><img src="artefacts/create_network_components/10.png" width="700" height="639"></p>
+
+## Create an instance
