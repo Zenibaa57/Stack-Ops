@@ -118,6 +118,10 @@ To retrieve those information, we go back to the network stack deployment, under
 
 ## Create a user
 
+**By default, only the admin user is created for the client tenant. The good practice here is to create nominative user accounts, with privileges adapted according to the users in question, and to no longer use this admin account.**
+
+Here, an example concerning the addition of a new member in the client project:
+
 1. Use your admin username and password to log in to your OpenStack tenant
 2. Under the "Identity" tab, click on "Users" then "Create user"
 3. Fill in the fields as follows and click on "Create user":
@@ -127,10 +131,32 @@ To retrieve those information, we go back to the network stack deployment, under
 
 ## Create a key pair
 
+**To allow new users to create instances and then connect to them, new key pairs must be created:**
+
 1. Use your username and password to log in to your OpenStack tenant
-2. Under the "Compute" tab, click on "Key Pairs" then "Create Key Pair"
+2. Under the "Project" tab, then "Compute", click on "Key Pairs" then "Create Key Pair"
 3. Fill in the fields as follows and click on "Create Key Pair":
 <p align="center"><img src="artefacts/create_a_key_pair/1.png" width="700" height="272"></p>
 
 *The private key will then be downloaded. Keep it in a safe place.*
 
+## Create network components
+
+**It is possible that the network infrastructure provided by the provider does not meet all the customer's needs. In such a situation, the customer is free to create as many networks as he wishes.**
+
+### Create a network and a subnet
+
+1. Use your username and password to log in to your OpenStack tenant
+2. Under the "Project" tab, then "Network", click on "Networks" then "Create Network"
+3. Indicate the name of the network and click on "Next":
+<p align="center"><img src="artefacts/create_network_components/1.png" width="700" height="439"></p>
+4. Indicate the name of the subnet, its CIDR and click on "Next" (by default, the gateway is the first IP address of the subnet):
+<p align="center"><img src="artefacts/create_network_components/2.png" width="700" height="498"></p>
+5. Now, it is possible define the DHCP allocation pool (left by default in the example below), DNS servers and routes:
+<p align="center"><img src="artefacts/create_network_components/3.png" width="700" height="586"></p>
+
+### Create a router
+
+
+
+### Create a security group
