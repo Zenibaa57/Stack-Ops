@@ -93,12 +93,11 @@ The provider automatically creates the client tenant. The username and password 
 1. Use your username and password to log in to your OpenStack tenant (an account that has the rights to deploy stacks)
 2. Under the "Project" tab, then "Orchestration", click on "Stacks" then "Launch Stack"
 3. Select the template then click on "Next":
-<p align="center"><img src="artefacts/deploy_heat_stacks/1.png" width="700" height="395"></p>
-4. Fill in the fields as follows and click on "Launch":
-<p align="center"><img src="artefacts/deploy_heat_stacks/2.png" width="700" height="723"></p>
-5. Verify that the deployment went well:<br/><br/>
-
-<p align="center"><img src="artefacts/deploy_heat_stacks/3.png" width="700" height="864"></p><br/>
+4. <p align="center"><img src="artefacts/deploy_heat_stacks/1.png" width="700" height="395"></p>
+5. Fill in the fields as follows and click on "Launch":
+6. <p align="center"><img src="artefacts/deploy_heat_stacks/2.png" width="700" height="723"></p>
+7. Verify that the deployment went well:<br/><br/>
+8. <p align="center"><img src="artefacts/deploy_heat_stacks/3.png" width="700" height="864"></p><br/>
 
 **For the deployment of the NTP, DNS and LDAP services, the id of the target network and subnet must be extracted.**
 
