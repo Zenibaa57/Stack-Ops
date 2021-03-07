@@ -193,3 +193,39 @@ For example, let's say you want to create rules that allow RDP traffic (ingress)
 <p align="center"><img src="artefacts/create_network_components/10.png" width="700" height="639"></p>
 
 ## Create an instance
+
+**With all the elements previously created, we will see how to create an RDP server. Let's assume that the xrdp package is included in the cloud image that we are going to use.**
+
+1. Use your username and password to log in to your OpenStack tenant
+2. Under the "Project" tab, then "Compute", click on "Instances" then "Launch Instance"
+3. Indicate the name of the instance and the availability zone then click on "Next":
+<p align="center"><img src="artefacts/create_an_instance/1.png" width="700" height="433"></p>
+
+4. Select the image uploaded previously and click on "Next":
+<p align="center"><img src="artefacts/create_an_instance/2.png" width="700" height="648"></p>
+
+5. Select a flavor that meets the requirements of the selected image, for example m2.xsmall, and click on "Next":
+<p align="center"><img src="artefacts/create_an_instance/3.png" width="700" height="844"></p>
+
+6. Select the network created previously, click on "Next" and "Next" again:
+<p align="center"><img src="artefacts/create_an_instance/4.png" width="700" height="433"></p>
+
+7. Select the security group created previously and click on "Next":
+<p align="center"><img src="artefacts/create_an_instance/5.png" width="700" height="469"></p>
+
+8. Select the key pair created previously and click on "Launch Instance":
+<p align="center"><img src="artefacts/create_an_instance/6.png" width="700" height="477"></p>
+
+9. Since the instance is located in a network connected to the external network, it is possible to associate a floating IP to it:
+<p align="center"><img src="artefacts/create_an_instance/7.png" width="700" height="478"></p>
+
+10. Click on "+":
+<p align="center"><img src="artefacts/create_an_instance/8.png" width="700" height="281"></p>
+
+11. Click on "Allocate IP":
+<p align="center"><img src="artefacts/create_an_instance/9.png" width="700" height="329"></p>
+
+12. Finally, click on "Associate":
+<p align="center"><img src="artefacts/create_an_instance/10.png" width="700" height="281"></p>
+
+*Now that the instance has a floating IP, it is possible to connect to it via RDP from the outside via RDP, assuming that the **xrdp** package is installed on the Ubuntu instance of course.*
