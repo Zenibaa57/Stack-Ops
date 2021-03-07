@@ -228,4 +228,4 @@ For example, let's say you want to create rules that allow RDP traffic (ingress)
 12. Finally, click on "Associate":
 <p align="center"><img src="artefacts/create_an_instance/10.png" width="700" height="281"></p>
 
-*Now that the instance has a floating IP, it is possible to connect to it via RDP from the outside via RDP, assuming that the **xrdp** package is installed on the Ubuntu instance of course.*
+*Now that the instance has a floating IP, it is possible to connect to it via RDP from the outside, assuming that the **xrdp** package is installed on the Ubuntu instance of course.*
