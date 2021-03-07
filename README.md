@@ -70,7 +70,7 @@ The provider automatically creates the client tenant. The username and password 
 
 **This example shows how to upload an Ubuntu cloud image (Ubuntu Server 18.04 LTS - Bionic Beaver):**
 
-1 - Download the cloud image from the following link: https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img (the same goes for other Linux distributions)<br/>2 - Use your username and password to log in to your OpenStack tenant<br/>3 - Under the "Project" tab, then "Compute", click on "Images" then "Create Image"<br/>4 - Fill in the fields as follows and click on "Create Image":
+**1** - Download the cloud image from the following link: https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img (the same goes for other Linux distributions)<br/>**2** - Use your username and password to log in to your OpenStack tenant<br/>**3** - Under the "Project" tab, then "Compute", click on "Images" then "Create Image"<br/>**4** - Fill in the fields as follows and click on "Create Image":
 
 <p align="center"><img src="artefacts/upload_an_image/1.png" width="700" height="572"></p>
 
@@ -88,14 +88,13 @@ The provider automatically creates the client tenant. The username and password 
 
 **Here, how to deploy a stack:**
 
-1 - Use your username and password to log in to your OpenStack tenant (an account that has the rights to deploy stacks)
+**1** - Use your username and password to log in to your OpenStack tenant (an account that has the rights to deploy stacks)<br/>**2** - Under the "Project" tab, then "Orchestration", click on "Stacks" then "Launch Stack"<br/>**3** - Select the template then click on "Next":
 
-2 - Under the "Project" tab, then "Orchestration", click on "Stacks" then "Launch Stack"
-3 - Select the template then click on "Next":
 <p align="center"><img src="artefacts/deploy_heat_stacks/1.png" width="700" height="395"></p>
-4 - Fill in the fields as follows and click on "Launch":
+**4** - Fill in the fields as follows and click on "Launch":
+
 <p align="center"><img src="artefacts/deploy_heat_stacks/2.png" width="700" height="723"></p>
-5 - Verify that the deployment went well:<br/><br/>
+**5** - Verify that the deployment went well:<br/><br/>
 
 <p align="center"><img src="artefacts/deploy_heat_stacks/3.png" width="700" height="864"></p><br/>
 
