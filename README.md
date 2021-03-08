@@ -178,7 +178,7 @@ For example, you can attach your network the router "router_in_the_middle" if yo
 
 ### Create a security group
 
-**Security groups provides segmentation within a network as well as full control over traffic that ingresses or egresses an instance in a network.**
+**Security groups provide segmentation within a network as well as full control over traffic that ingresses or egresses an instance in a network.**
 
 For example, let's say you want to create rules that allow RDP traffic (ingress):
 
