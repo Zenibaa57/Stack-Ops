@@ -58,11 +58,15 @@
 
 The purpose of this user guide is to detail the various actions that can be carried out by the customer as part of the management of its infrastructure (see simplified RACI).
 
+1. [Retrieve admin password and SSH private key](#retrieve-admin-password-and-SSH-private-key)
+2. [Upload an image](#upload-an-image)
+
 ## Retrieve admin password and SSH private key
 
 The provider automatically creates the client tenant. The username and password are then sent to the admin user of the client tenant. Moreover, a key pair is also created so that the admin user can create instances and connect to them.
 
 **The SSH private key (and the password too) can be retrieved under the "Project" tab, then "Orchestration" and click on "admin.prepare_client_env_<client_id>":<br/>**
+
 <p align="center"><img src="artefacts/retrieve_adm_pwd_and_ssh_priv_key/1.png" width="700" height="715"></p>
 
 *The admin user is of course free to delete this key pair and create a new one. The creation of key pairs will be presented later in this user guide.*
