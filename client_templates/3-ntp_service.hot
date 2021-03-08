@@ -57,6 +57,7 @@ resources:
       - { subnet: { get_param: subnet_dmz_id }, ip_address: 192.168.0.133 }
       security_groups:
       - sg_ntp_service
+      - sg_ssh
       - sg_icmp
 
   ntp_server_floating_ip:
