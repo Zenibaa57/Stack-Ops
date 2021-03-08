@@ -69,9 +69,9 @@ The purpose of this user guide is to detail the various actions that can be carr
 5. [Create a user](#create-a-user)
 6. [Create a key pair](#create-a-key-pair)
 7. [Create network components](#create-network-components)<br/>
-	1. [Create a network and a subnet](#create-a-network-and-a-subnet)
-	2. [Create a router](#create-a-router)
-	3. [Create a security group](#create-a-security-group)
+      1. [Create a network and a subnet](#create-a-network-and-a-subnet)
+      2. [Create a router](#create-a-router)
+      3. [Create a security group](#create-a-security-group)
 8. [Create an instance](#create-an-instance)<br/><br/>
 
 ## Retrieve admin password and SSH private key
