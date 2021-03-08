@@ -56,10 +56,21 @@
 
 # User guide
 
-The purpose of this user guide is to detail the various actions that can be carried out by the customer as part of the management of its infrastructure (see simplified RACI).
+The purpose of this user guide is to detail the various actions that can be carried out by the customer as part of the management of its infrastructure (see simplified RACI).<br/>
+
+**Table of contents:**
 
 1. [Retrieve admin password and SSH private key](#retrieve-admin-password-and-SSH-private-key)
 2. [Upload an image](#upload-an-image)
+3. [Deploy a stack (Heat)](#deploy-a-stack)
+4. [Destroy a stack (Heat)](#destroy-a-stack)
+5. [Create a user](#create-a-user)
+6. [Create a key pair](#create-a-key-pair)
+7. [Create network components](#create-network-components)
+   1. [Create a network and a subnet](#create-a-network-and-a-subnet)
+   2. [Create a router](#create-a-router)
+   3. [Create a security group](#create-a-security-group)
+8. [Create an instance](#create-an-instance)<br/>
 
 ## Retrieve admin password and SSH private key
 
