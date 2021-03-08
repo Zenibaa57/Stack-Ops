@@ -56,7 +56,9 @@
 
 # User guide
 
-The purpose of this user guide is to detail the various actions that can be carried out by the customer as part of the management of its infrastructure (see simplified RACI).<br/><br/>
+The purpose of this user guide is to detail the various actions that can be carried out by the customer as part of the management of its infrastructure (see simplified RACI).
+
+--
 
 ### Table of contents:
 
@@ -66,8 +68,7 @@ The purpose of this user guide is to detail the various actions that can be carr
 4. [Destroy a stack (Heat)](#destroy-a-stack)
 5. [Create a user](#create-a-user)
 6. [Create a key pair](#create-a-key-pair)
-7. [Create network components](#create-network-components)
-
+7. [Create network components](#create-network-components)<br/>
 	1. [Create a network and a subnet](#create-a-network-and-a-subnet)
 	2. [Create a router](#create-a-router)
 	3. [Create a security group](#create-a-security-group)
