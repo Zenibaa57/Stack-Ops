@@ -60,7 +60,7 @@ The purpose of this user guide is to detail the various actions that can be carr
 
 --
 
-**Table of contents:**
+### Table of contents:
 
 1. [Retrieve admin password and SSH private key](#retrieve-admin-password-and-SSH-private-key)
 2. [Upload an image](#upload-an-image)
@@ -72,9 +72,7 @@ The purpose of this user guide is to detail the various actions that can be carr
    1. [Create a network and a subnet](#create-a-network-and-a-subnet)
    2. [Create a router](#create-a-router)
    3. [Create a security group](#create-a-security-group)
-8. [Create an instance](#create-an-instance)
-
---<br/>
+8. [Create an instance](#create-an-instance)<br/><br/>
 
 ## Retrieve admin password and SSH private key
 
