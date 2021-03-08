@@ -6,6 +6,7 @@
 
 * [`Nova`](https://opendev.org/openstack/puppet-nova/) -  (Compute)
 * [`Neutron`](https://opendev.org/openstack/puppet-neutron/) - (Networking)
+* [`Cinder`](https://opendev.org/openstack/puppet-cinder/) - (Block Storage Service)
 * [`Keystone`](https://opendev.org/openstack/puppet-keystone/) - (Identity)
 * [`Glance`](https://opendev.org/openstack/puppet-glance/) - (Image Service)
 * [`Heat`](https://opendev.org/openstack/puppet-heat/) - (Orchestration)
